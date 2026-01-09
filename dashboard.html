@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendición de Cuentas - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
+</head>
+<body>
+
+    <header class="header-dashboard">
+        <div class="header-content">
+            <span class="mini-logo">🏛️</span>
+            <div class="header-text">
+                <h1>CASINO DE OFICIALES</h1>
+                <h2>ESCUADRÓN SEGURIDAD VIAL “SANTA CATALINA”</h2>
+            </div>
+            <a href="index.html" class="btn-back">Volver al Inicio</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section-header">
+            <h3 class="section-title">Socios Activos</h3>
+            <button class="btn-chart" onclick="abrirModal()">📊 Ver Gráfico de Aportes</button>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="text-left">Nro Ord.</th>
+                        <th class="text-left">Jerarquía</th>
+                        <th class="text-left">Apellido y Nombre</th>
+                        <th class="text-center">Octubre y Noviembre 2025</th>
+                        <th class="text-center">Diciembre 2025</th>
+                        <th class="text-center">Enero 2026</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla"></tbody>
+                <tfoot id="pie-tabla"></tfoot>
+            </table>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 50px;">Movimiento Contable (Debe y Haber)</h3>
+        <div class="table-container">
+            <table class="data-table contable-table">
+                <thead>
+                    <tr>
+                        <th class="text-left">Concepto</th>
+                        <th class="text-center">Debe (Entrada)</th>
+                        <th class="text-center">Haber (Salida)</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-contable"></tbody>
+                <tfoot id="pie-contable"></tfoot>
+            </table>
+        </div>
+
+        <div class="facturas-container">
+            <a href=https://drive.google.com/file/d/1MokfSI6ee2t1LYwGj3edzefgp_XC1rPA/view?usp=sharing target="_blank" class="btn-factura">📄 Factura Regalo por cambio de destino</a>
+            <a href=https://drive.google.com/file/d/19qbbApx9duot8c1CIEeY-IGbnDZGwIKL/view?usp=sharing target="_blank" class="btn-factura">📄 Factura Cena de despedida y cambio de destino</a>
+            <a href=https://drive.google.com/file/d/1p7FRydt0wyUTgr7bJOrUL7aa2hSUFplx/view?usp=sharing target="_blank" class="btn-factura acta">📜 Acta de conformidad del casino SSOO</a>
+        </div>
+    </main>
+
+    <div id="modalGrafico" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-modal" onclick="cerrarModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Aportes Mensuales Consolidados</h3>
+            </div>
+            <div class="chart-container-modal">
+                <canvas id="aportesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Fotográfica - Casino de Oficiales</title>
+    <link rel="icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header-dashboard">
+        <div class="header-content">
+            <span class="mini-logo">🏛️</span>
+            <div class="header-text">
+                <h1>GALERÍA FOTOGRÁFICA</h1>
+                <h2>EVENTOS Y ACTIVIDADES</h2>
+            </div>
+            <a href="dashboard.html" class="btn-back" title="Regresar al panel de control">
+                <i class="fas fa-calculator"></i> Volver a Rendición de Cuenta
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="galeria-layout">
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img src="/CENA 29DIC25 (3).jpeg" alt="Evento 1" class="active">
+                    <img src="/CENA 29DIC25 (4).jpeg" alt="Evento 2">
+                    <img src="/cena 29DIC25 (6).jpeg" alt="Evento 4">
+                    <img src="/CENA 29DIC25 (7).jpeg" alt="Evento 5">
+                    <img src="/cena 29DIC25 (8).jpeg" alt="Evento 6">
+                </div>
+                <button class="carousel-prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="texto-galeria">
+                <p>El día lunes 29 de diciembre de 2025 se llevó a cabo una cena de camaradería de despedida de fin de año con la participación de los socios del Casino de Oficiales. En la oportunidad, asimismo, se realizó la despedida del Segundo Comandante Cristian Javier Ayala, quien cumplimenta pase a la Escuela Superior de Gendarmería Nacional “Grl Br D Manuel María Calderón”. Durante el transcurso de la cena se destacó y reconoció su desempeño y trayectoria en el Escuadrón Seguridad Vial “Santa Catalina”, haciéndosele entrega de un obsequio en reconocimiento a su labor, por parte del Casino de Oficiales.</p>
+            </div>
+        </div>
+
+        <div class="nav-container-centered">
+            <a href=https://drive.google.com/drive/folders/1QftVjbLZOL3nNL73EmnrGGd_qu9vaqa0?usp=sharing target="_blank" class="btn-docs-main" style="background-color: #2d6a4f;">
+                <i class="fas fa-download"></i> descarga de fotografias cenas 29ENE25
+            </a>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
+        <a href=https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Consultas vía WhatsApp
+        </a>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide img');
+        function changeSlide(direction) {
+            if(slides.length === 0) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+    </script>
+</body>
+</html>

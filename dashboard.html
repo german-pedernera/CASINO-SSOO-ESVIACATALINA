@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rendición de Cuentas - Dashboard</title>
+    <title>Rendición de Cuentas</title>
+    <link rel="icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="shortcut icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
 </head>
 <body>
 
@@ -17,17 +18,21 @@
                 <h1>CASINO DE OFICIALES</h1>
                 <h2>ESCUADRÓN SEGURIDAD VIAL “SANTA CATALINA”</h2>
             </div>
-            <a href="index.html" class="btn-back">Volver al Inicio</a>
+            <a href="index.html" class="btn-back" title="Regresar a la pantalla principal">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
         </div>
     </header>
 
     <main class="container">
         <div class="section-header">
+            <button class="btn-chart" onclick="abrirModal()" title="Visualizar comparación gráfica">
+                <i class="fas fa-chart-bar"></i> Ver Gráfico de Aportes
+            </button>
             <h3 class="section-title">Socios Activos</h3>
-            <button class="btn-chart" onclick="abrirModal()">📊 Ver Gráfico de Aportes</button>
         </div>
         
-        <div class="table-container">
+        <div class="table-container" style="overflow-x: auto;">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -45,7 +50,7 @@
         </div>
 
         <h3 class="section-title" style="margin-top: 50px;">Movimiento Contable (Debe y Haber)</h3>
-        <div class="table-container">
+        <div class="table-container" style="overflow-x: auto;">
             <table class="data-table contable-table">
                 <thead>
                     <tr>
@@ -59,20 +64,32 @@
             </table>
         </div>
 
-        <div class="facturas-container">
-            <a href=https://drive.google.com/file/d/1MokfSI6ee2t1LYwGj3edzefgp_XC1rPA/view?usp=sharing target="_blank" class="btn-factura">📄 Factura Regalo por cambio de destino</a>
-            <a href=https://drive.google.com/file/d/19qbbApx9duot8c1CIEeY-IGbnDZGwIKL/view?usp=sharing target="_blank" class="btn-factura">📄 Factura Cena de despedida y cambio de destino</a>
-            <a href=https://drive.google.com/file/d/1p7FRydt0wyUTgr7bJOrUL7aa2hSUFplx/view?usp=sharing target="_blank" class="btn-factura acta">📜 Acta de conformidad del casino SSOO</a>
+        <div class="nav-container-centered">
+            <a href="documentacion.html" class="btn-docs-main" title="Ver comprobantes y actas">
+                <i class="fas fa-folder-open"></i> Documentación Respaldatoria
+            </a>
+            <a href="galeria.html" class="btn-docs-main" title="Ver fotos de eventos">
+                <i class="fas fa-camera-retro"></i> Galería Fotográfica
+            </a>
         </div>
     </main>
 
+    <footer class="main-footer">
+        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
+        <a href=https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Consultas vía WhatsApp
+        </a>
+    </footer>
+
     <div id="modalGrafico" class="modal-overlay">
         <div class="modal-card">
-            <span class="close-modal" onclick="cerrarModal()">&times;</span>
-            <div class="modal-header">
+            <span class="close-modal" onclick="cerrarModal()" title="Cerrar ventana">
+                <i class="fas fa-times"></i>
+            </span>
+            <div class="modal-header" style="text-align: center; margin-bottom: 20px;">
                 <h3>Aportes Mensuales Consolidados</h3>
             </div>
-            <div class="chart-container-modal">
+            <div class="chart-container-modal" style="height: 400px;">
                 <canvas id="aportesChart"></canvas>
             </div>
         </div>

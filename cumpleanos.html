@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumpleaños - Casino de Oficiales</title>
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="app-layout">
+
+    <button class="mobile-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">🏛️</span>
+            <h3>CASINO DE OFICIALES</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <button onclick="window.location.href='index.html'" class="nav-item">
+                <i class="fas fa-home"></i> Inicio
+            </button>
+            <button onclick="window.location.href='dashboard.html'" class="nav-item">
+                <i class="fas fa-calculator"></i> Rendición de Cuenta
+            </button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item">
+                <i class="fas fa-folder-open"></i> Documentación
+            </button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item">
+                <i class="fas fa-camera-retro"></i> Galería Fotográfica
+            </button>
+            <button onclick="window.location.href='cumpleanos.html'" class="nav-item active">
+                <i class="fas fa-birthday-cake"></i> Fecha de Cumpleaños
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="ws-btn">
+                <i class="fab fa-whatsapp"></i> Whatsapp "Casino SSOO"
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="content-header">
+            <h2 style="color: var(--verde-oscuro);">Calendario de Cumpleaños</h2>
+            <p>Escuadrón Seguridad Vial "Santa Catalina"</p>
+        </header>
+
+        <div class="dashboard-card" style="text-align: center; padding: 50px 20px; margin-bottom: 25px; border: 2px dashed #cbd5e1;">
+            <div style="font-size: 60px; color: #f59e0b; margin-bottom: 20px;">
+                <i class="fas fa-user-hard-hat"></i> <i class="fas fa-tools"></i>
+            </div>
+            <h3 style="color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">
+                ¡¡¡PROXIMAMENTE ESTARA DISPONIBLE CALENDARIO DE CUMPLEÑO DE LOS SOCIOS!!!
+            </h3>
+            <p style="color: #64748b; margin-top: 10px;">Estamos trabajando en la carga de datos del personal.</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3 class="section-title" style="border-left: 4px solid var(--verde-claro); padding-left: 15px; margin-bottom: 20px;">Lista de Socios Activos</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Grado</th>
+                            <th>Nombre</th>
+                            <th class="text-center">Fecha de Nacimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1er Alferez</td>
+                            <td>Germán Andrés Ramírez Pedernera</td>
+                            <td class="text-center" style="color: #94a3b8; font-style: italic;">Pendiente</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() { 
+            document.getElementById('sidebar').classList.toggle('active'); 
+        }
+    </script>
+</body>
+</html>

@@ -3,56 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación Respaldatoria - Casino de Oficiales</title>
+    <title>Documentación - Casino de Oficiales</title>
     <link rel="icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="app-layout">
 
-    <header class="header-dashboard">
-        <div class="header-content">
-            <span class="mini-logo">🏛️</span>
-            <div class="header-text">
-                <h1>DOCUMENTACIÓN RESPALDATORIA</h1>
-                <h2>ARCHIVOS ESCANEADOS</h2>
-            </div>
-            <a href="dashboard.html" class="btn-back" title="Regresar al panel de control">
-                <i class="fas fa-calculator"></i> Volver a Rendición de Cuenta
+    <button class="mobile-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">🏛️</span>
+            <h3>CASINO DE OFICIALES</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <button onclick="window.location.href='index.html'" class="nav-item">
+                <i class="fas fa-home"></i> Inicio
+            </button>
+            <button onclick="window.location.href='dashboard.html'" class="nav-item">
+                <i class="fas fa-calculator"></i> Rendición de Cuenta
+            </button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item active">
+                <i class="fas fa-folder-open"></i> Documentación
+            </button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item">
+                <i class="fas fa-camera-retro"></i> Galería Fotográfica
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="ws-btn">
+                <i class="fab fa-whatsapp"></i> Whatsapp "Casino SSOO"
             </a>
         </div>
-    </header>
+    </aside>
 
-    <main class="container">
-        <div class="docs-flex-container" style="display: flex; flex-direction: column; gap: 20px;">
-            
-            <div class="doc-section">
-                <h3 class="month-title">Documentación General</h3>
-                <div class="doc-grid-single">
-                    <a href="https://drive.google.com/file/d/1grCKQGxqpUF7Z6D6hqBWGesShu7uNnEw/view?usp=sharing" target="_blank" class="doc-card">
-                        <i class="fas fa-file-signature"></i> Acta de conformación y consentimiento casino de SSOO
-                    </a>
-                </div>
+    <main class="main-content">
+        <header class="content-header">
+            <h2>Documentación Respaldatoria</h2>
+            <p>Archivos escaneados, actas y comprobantes de gastos</p>
+        </header>
+
+        <div class="dashboard-card">
+            <h3 class="section-title" style="border-left: 4px solid var(--verde-claro); padding-left: 15px;">Documentación General</h3>
+            <div style="margin: 20px 0;">
+                <a href="https://drive.google.com/file/d/1grCKQGxqpUF7Z6D6hqBWGesShu7uNnEw/view?usp=sharing" target="_blank" style="display: flex; align-items: center; padding: 20px; background: #f8fafc; border-radius: 10px; text-decoration: none; color: var(--verde-oscuro); border: 1px solid #e2e8f0;">
+                    <i class="fas fa-file-signature" style="font-size: 24px; margin-right: 15px;"></i>
+                    <span>Acta de conformación y consentimiento casino de SSOO</span>
+                </a>
             </div>
 
-            <div class="doc-section">
-                <h3 class="month-title">Diciembre 2025</h3>
-                <div class="doc-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                    <a href="https://drive.google.com/file/d/19qbbApx9duot8c1CIEeY-IGbnDZGwIKL/view?usp=sharing" target="_blank" class="doc-card">
-                        <i class="fas fa-file-invoice-dollar"></i> Factura Cena de Despedida
-                    </a>
-                    <a href="https://drive.google.com/file/d/1MokfSI6ee2t1LYwGj3edzefgp_XC1rPA/view?usp=sharing" target="_blank" class="doc-card">
-                        <i class="fas fa-gift"></i> Factura Regalo por Cambio de Destino
-                    </a>
-                </div>
+            <h3 class="section-title" style="border-left: 4px solid var(--verde-claro); padding-left: 15px; margin-top: 40px;">Diciembre 2025</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                <a href="https://drive.google.com/file/d/19qbbApx9duot8c1CIEeY-IGbnDZGwIKL/view?usp=sharing" target="_blank" style="display: flex; align-items: center; padding: 20px; background: #f8fafc; border-radius: 10px; text-decoration: none; color: var(--verde-oscuro); border: 1px solid #e2e8f0;">
+                    <i class="fas fa-file-invoice-dollar" style="font-size: 24px; margin-right: 15px;"></i>
+                    <span>Factura Cena de Despedida</span>
+                </a>
+                <a href="https://drive.google.com/file/d/1MokfSI6ee2t1LYwGj3edzefgp_XC1rPA/view?usp=sharing" target="_blank" style="display: flex; align-items: center; padding: 20px; background: #f8fafc; border-radius: 10px; text-decoration: none; color: var(--verde-oscuro); border: 1px solid #e2e8f0;">
+                    <i class="fas fa-gift" style="font-size: 24px; margin-right: 15px;"></i>
+                    <span>Factura Regalo por Cambio de Destino</span>
+                </a>
             </div>
-
         </div>
     </main>
 
-    <footer class="main-footer">
-        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
-    </footer>
-
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+    </script>
 </body>
 </html>

@@ -3,68 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería Fotográfica - Casino de Oficiales</title>
+    <title>Galería - Casino de Oficiales</title>
     <link rel="icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="app-layout">
 
-    <header class="header-dashboard">
-        <div class="header-content">
-            <span class="mini-logo">🏛️</span>
-            <div class="header-text">
-                <h1>GALERÍA FOTOGRÁFICA</h1>
-                <h2>EVENTOS Y ACTIVIDADES</h2>
-            </div>
-            <a href="dashboard.html" class="btn-back" title="Regresar al panel de control">
-                <i class="fas fa-calculator"></i> Volver a Rendición de Cuenta
+    <button class="mobile-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">🏛️</span>
+            <h3>CASINO DE OFICIALES</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <button onclick="window.location.href='index.html'" class="nav-item">
+                <i class="fas fa-home"></i> Inicio
+            </button>
+            <button onclick="window.location.href='dashboard.html'" class="nav-item">
+                <i class="fas fa-calculator"></i> Rendición de Cuenta
+            </button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item">
+                <i class="fas fa-folder-open"></i> Documentación
+            </button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item active">
+                <i class="fas fa-camera-retro"></i> Galería Fotográfica
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="ws-btn">
+                <i class="fab fa-whatsapp"></i> Whatsapp "Casino SSOO"
             </a>
         </div>
-    </header>
+    </aside>
 
-    <main class="container">
-        <div class="galeria-layout" style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="carousel-container" style="width: 100%; max-width: 800px; margin: 0 auto;">
+    <main class="main-content">
+        <header class="content-header">
+            <h2>Galería Fotográfica</h2>
+            <p>Eventos y actividades institucionales</p>
+        </header>
+
+        <div class="dashboard-card">
+            <div class="carousel-container" style="max-width: 800px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 15px;">
                 <div class="carousel-slide">
-                    <img src="/CENA 29DIC25 (3).jpeg" alt="Evento 1" class="active">
-                    <img src="/CENA 29DIC25 (4).jpeg" alt="Evento 2">
-                    <img src="/cena 29DIC25 (6).jpeg" alt="Evento 4">
-                    <img src="/CENA 29DIC25 (7).jpeg" alt="Evento 5">
-                    <img src="/cena 29DIC25 (8).jpeg" alt="Evento 6">
+                    <img src="/CENA 29DIC25 (3).jpeg" alt="Evento 1" class="active" style="width: 100%; height: 450px; object-fit: cover; display: block;">
+                    <img src="/CENA 29DIC25 (4).jpeg" alt="Evento 2" style="width: 100%; height: 450px; object-fit: cover; display: none;">
+                    <img src="/cena 29DIC25 (6).jpeg" alt="Evento 3" style="width: 100%; height: 450px; object-fit: cover; display: none;">
+                    <img src="/CENA 29DIC25 (7).jpeg" alt="Evento 4" style="width: 100%; height: 450px; object-fit: cover; display: none;">
+                    <img src="/cena 29DIC25 (8).jpeg" alt="Evento 5" style="width: 100%; height: 450px; object-fit: cover; display: none;">
                 </div>
-                <button class="carousel-prev" onclick="changeSlide(-1)">
+                <button class="carousel-prev" onclick="changeSlide(-1)" style="position: absolute; top: 50%; left: 10px; background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <button class="carousel-next" onclick="changeSlide(1)">
+                <button class="carousel-next" onclick="changeSlide(1)" style="position: absolute; top: 50%; right: 10px; background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
 
-            <div class="texto-galeria" style="padding: 15px; text-align: justify;">
-                <p>El día lunes 29 de diciembre de 2025 se llevó a cabo una cena de camaradería de despedida de fin de año con la participación de los socios del Casino de Oficiales. Durante el evento, se realizaron reconocimientos al personal que cumplimentó cambios de destino, destacando su trayectoria en el Escuadrón Seguridad Vial “Santa Catalina” y fortaleciendo los vínculos de camaradería institucional.</p>
+            <div style="margin-top: 30px; line-height: 1.8; text-align: justify; color: #444;">
+                <p>El día lunes 29 de diciembre de 2025 se llevó a cabo una cena de camaradería de despedida de fin de año con la participación de los socios del Casino de Oficiales. Durante el evento, se realizaron reconocimientos al personal que cumplimentó cambios de destino, destacando su trayectoria en el Escuadrón Seguridad Vial “Santa Catalina”.</p>
             </div>
-        </div>
 
-        <div class="nav-container-centered" style="margin-top: 30px;">
-            <a href="https://drive.google.com/drive/folders/1QftVjbLZOL3nNL73EmnrGGd_qu9vaqa0?usp=sharing" target="_blank" class="btn-docs-main" style="background-color: #2d6a4f; width: 100%; max-width: 400px; text-align: center;">
-                <i class="fas fa-download"></i> Descarga de Fotografías
-            </a>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://drive.google.com/drive/folders/1QftVjbLZOL3nNL73EmnrGGd_qu9vaqa0?usp=sharing" target="_blank" class="ws-btn" style="background-color: var(--verde-claro); display: inline-flex; width: auto; padding: 12px 30px;">
+                    <i class="fas fa-download" style="margin-right: 10px;"></i> Descargar Todas las Fotos
+                </a>
+            </div>
         </div>
     </main>
 
-    <footer class="main-footer">
-        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
-    </footer>
-
     <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide img');
         function changeSlide(direction) {
-            if(slides.length === 0) return;
-            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].style.display = 'none';
             currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
+            slides[currentSlide].style.display = 'block';
         }
     </script>
 </body>

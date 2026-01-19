@@ -3,24 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino de Oficiales - Bienvenido</title>
+    <title>Inicio - Casino de Oficiales</title>
     <link rel="icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="home-body">
-    <div class="welcome-container">
-        <div class="logo-circle">🏛️</div>
-        <h1>CASINO DE OFICIALES</h1>
-        <p class="subtitle">ESCUADRÓN SEGURIDAD VIAL “SANTA CATALINA”</p>
-        <hr class="welcome-hr">
-        <a href="dashboard.html" class="btn-primary" title="Haga clic para ver el detalle de aportes y el balance contable">
-            <i class="fas fa-door-open"></i> Ingrese a Rendición de Cuenta
+<body class="app-layout">
+    <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">🏛️</span>
+            <h3>CASINO DE OFICIALES</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <button onclick="window.location.href='index.html'" class="nav-item active">
+                <i class="fas fa-home"></i> Inicio
+            </button>
+            <button onclick="window.location.href='dashboard.html'" class="nav-item">
+                <i class="fas fa-calculator"></i> Rendición
+            </button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item">
+                <i class="fas fa-file-alt"></i> Documentos
+            </button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item">
+                <i class="fas fa-camera"></i> Galería
+            </button>
+        </nav>
+        <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="ws-btn">
+            <i class="fab fa-whatsapp"></i> Whatsapp "Casino SSOO"
         </a>
-        <br>
-        <a href=https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO target="_blank" class="whatsapp-link">
-            <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
-        </a>
-    </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="dashboard-card" style="text-align: center; padding: 50px 20px;">
+            <div style="font-size: 60px; margin-bottom: 20px;">🏛️</div>
+            <h1 style="color: var(--verde-oscuro); margin-bottom: 10px;">BIENVENIDO</h1>
+            <h2 style="color: var(--verde-medio); font-weight: 400; margin-bottom: 30px;">CASINO DE OFICIALES</h2>
+            <p style="color: #666; max-width: 500px; margin: 0 auto 40px; line-height: 1.6;">
+                Escuadrón Seguridad Vial "SANTA CATALINA".<br>
+                Acceda al panel de rendición para consultar el balance contable y aportes de socios.
+            </p>
+            <a href="dashboard.html" class="nav-item" style="display: inline-flex; width: auto; background: var(--verde-oscuro); color: white; padding: 15px 40px; justify-content: center;">
+                <i class="fas fa-door-open"></i> Ingresar a Rendición
+            </a>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+    </script>
 </body>
 </html>

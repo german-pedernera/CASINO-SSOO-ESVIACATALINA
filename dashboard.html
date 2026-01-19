@@ -3,104 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rendición de Cuentas</title>
-    <link rel="icon" href="/icons8-banco-doodle-96.png" type="image/x-icon">
+    <title>Dashboard - Casino</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="app-layout">
+    <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
 
-    <header class="header-dashboard">
-        <div class="header-content">
-            <span class="mini-logo">🏛️</span>
-            <div class="header-text">
-                <h1>CASINO DE OFICIALES</h1>
-                <h2>ESCUADRÓN SEGURIDAD VIAL “SANTA CATALINA”</h2>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header"><span class="logo-icon">🏛️</span><h3>CASINO DE OFICIALES</h3></div>
+        <nav class="sidebar-nav">
+            <button onclick="window.location.href='index.html'" class="nav-item"><i class="fas fa-home"></i> Inicio</button>
+            <button onclick="abrirModal()" class="nav-item"><i class="fas fa-chart-bar"></i> Gráfico</button>
+            <button onclick="abrirModalTransf()" class="nav-item"><i class="fas fa-university"></i> Datos Pago</button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item"><i class="fas fa-file"></i> Documentos</button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item"><i class="fas fa-camera"></i> Galería</button>
+        </nav>
+        <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="ws-btn">
+            <i class="fab fa-whatsapp"></i> Whatsapp "Casino SSOO"
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="dashboard-card">
+            <h2 style="color: var(--verde-oscuro); margin-bottom: 5px; text-align: center;">Escuadrón Seguridad Vial "Santa Catalina"</h2>
+            <hr style="border: 0; height: 1px; background: #e2e8f0; margin-bottom: 25px;">
+            
+            <h3>Socios Activos</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Grado</th>
+                            <th>Nombre</th>
+                            <th class="text-center">Oct/Nov</th>
+                            <th class="text-center">Dic</th>
+                            <th class="text-center">Ene</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla"></tbody>
+                    <tfoot id="pie-tabla"></tfoot>
+                </table>
             </div>
-            <a href="index.html" class="btn-back">
-                <i class="fas fa-arrow-left"></i> Volver al Inicio
-            </a>
-        </div>
-    </header>
 
-    <main class="container">
-        <div class="section-header" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="btn-chart" onclick="abrirModal()">
-                <i class="fas fa-chart-bar"></i> Ver Gráfico de Aportes
-            </button>
-            <button class="btn-chart" onclick="abrirModalTransf()" style="background-color: #2d6a4f;">
-                <i class="fas fa-university"></i> Datos para transferencia de cuotas socio Casino SSOO
-            </button>
-        </div>
-        
-        <h3 class="section-title">Socios Activos</h3>
-        <div class="table-container" style="overflow-x: auto;">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th class="text-left">Nro Ord.</th>
-                        <th class="text-left">Jerarquía</th>
-                        <th class="text-left">Apellido y Nombre</th>
-                        <th class="text-center">Octubre y Noviembre 2025</th>
-                        <th class="text-center">Diciembre 2025</th>
-                        <th class="text-center">Enero 2026</th>
-                    </tr>
-                </thead>
-                <tbody id="cuerpo-tabla"></tbody>
-                <tfoot id="pie-tabla"></tfoot>
-            </table>
-        </div>
-
-        <h3 class="section-title" style="margin-top: 50px;">Movimiento Contable (Debe y Haber)</h3>
-        <div class="table-container" style="overflow-x: auto;">
-            <table class="data-table contable-table">
-                <thead>
-                    <tr>
-                        <th class="text-left">Concepto</th>
-                        <th class="text-center">Debe (Entrada)</th>
-                        <th class="text-center">Haber (Salida)</th>
-                    </tr>
-                </thead>
-                <tbody id="cuerpo-contable"></tbody>
-                <tfoot id="pie-contable"></tfoot>
-            </table>
-        </div>
-
-        <div class="nav-container-centered">
-            <a href="documentacion.html" class="btn-docs-main"><i class="fas fa-folder-open"></i> Documentación Respaldatoria</a>
-            <a href="galeria.html" class="btn-docs-main"><i class="fas fa-camera-retro"></i> Galería Fotográfica</a>
+            <h3 style="margin-top:30px">Movimiento Contable</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th class="text-center">Debe</th>
+                            <th class="text-center">Haber</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-contable"></tbody>
+                    <tfoot id="pie-contable"></tfoot>
+                </table>
+            </div>
         </div>
     </main>
 
-    <div id="modalGrafico" class="modal-overlay">
-        <div class="modal-card">
-            <span class="close-modal" onclick="cerrarModal()"><i class="fas fa-times"></i></span>
-            <div class="modal-header"><h3>Aportes Mensuales Consolidados</h3></div>
-            <div class="chart-container-modal" style="height: 300px;"><canvas id="aportesChart"></canvas></div>
+    <div id="modalGrafico" class="modal-overlay" onclick="cerrarSiClickFuera(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="cerrarModal()">&times;</span>
+            <h3>Aportes</h3>
+            <div style="height:250px"><canvas id="aportesChart"></canvas></div>
         </div>
     </div>
 
-    <div id="modalTransf" class="modal-overlay">
-        <div class="modal-card">
-            <span class="close-modal" onclick="cerrarModalTransf()"><i class="fas fa-times"></i></span>
-            <div class="modal-header" style="text-align: center; border-bottom: 2px solid #2d6a4f; margin-bottom: 20px;">
-                <h3 style="color: #1b4332;">Información de Cuenta</h3>
-            </div>
-            <div style="line-height: 2; font-size: 1.1rem; color: #333;">
-                <p><strong>Titular:</strong> Germán Andrés Ramírez Pedernera</p>
-                <p><strong>CUIT/CUIL:</strong> 20-32559315-7</p>
+    <div id="modalTransf" class="modal-overlay" onclick="cerrarSiClickFuera(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="cerrarModalTransf()">&times;</span>
+            <h3>Datos Bancarios</h3>
+            <div style="font-size:0.9rem; line-height:1.6">
+                <p><strong>Titular:</strong> Germán Ramírez Pedernera</p>
                 <p><strong>Alias:</strong> profepedernera</p>
                 <p><strong>CBU:</strong> 1430001713020634460010</p>
-                <p><strong>N.º de cuenta:</strong> 1302063446001</p>
             </div>
         </div>
     </div>
-
-    <footer class="main-footer">
-        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
-        <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Consultas vía WhatsApp</a>
-    </footer>
 
     <script src="script.js"></script>
 </body>

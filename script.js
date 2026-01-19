@@ -5,6 +5,7 @@ const INGRESO_EX_SOCIOS = 40000;
 const GASTO_REGALO = 130000;
 const GASTO_CENA = 407000;
 
+// Lista de socios corregida (Sin Ayala)
 const socios = [
     { grado: "CTE", nombre: "SKIEBACK JOSE MARCELO", nov: true, dic: true, ene: true },
     { grado: "2DO CTE", nombre: "MAMAN ORFALI CRISTIAN", nov: true, dic: true, ene: true },
@@ -20,8 +21,6 @@ const socios = [
     { grado: "SUBALF", nombre: "VERA RAMIRO ALEJANDRO", nov: false, dic: false, ene: false }
 ];
 
-const getMontoClass = (valor) => (valor <= 0 ? 'monto-neg' : 'monto-pos');
-
 document.addEventListener("DOMContentLoaded", () => {
     let tNov = 0, tDic = 0, tEne = 0;
     const cuerpo = document.getElementById("cuerpo-tabla");
@@ -33,86 +32,107 @@ document.addEventListener("DOMContentLoaded", () => {
             const e = s.ene ? MONTO_GRAL : 0;
             tNov += n; tDic += d; tEne += e;
             
-            // Lógica para mostrar "---" si es $0 en los meses solicitados
-            const txtNov = n === 0 ? "---" : `$${n.toLocaleString('es-AR')}`;
-            const clsNov = n === 0 ? "" : getMontoClass(n);
-            
-            const txtDic = d === 0 ? "---" : `$${d.toLocaleString('es-AR')}`;
-            const clsDic = d === 0 ? "" : getMontoClass(d);
+            // Visualización de montos con "---" si es 0
+            const displayNov = n === 0 ? "---" : `$${n.toLocaleString('es-AR')}`;
+            const displayDic = d === 0 ? "---" : `$${d.toLocaleString('es-AR')}`;
+            const displayEne = e === 0 ? "---" : `$${e.toLocaleString('es-AR')}`;
 
             cuerpo.innerHTML += `
                 <tr>
-                    <td class="text-left">${index + 1}</td>
-                    <td class="text-left"><strong>${s.grado}</strong></td>
-                    <td class="text-left">${s.nombre}</td>
-                    <td class="text-center ${clsNov}">${txtNov}</td>
-                    <td class="text-center ${clsDic}">${txtDic}</td>
-                    <td class="text-center ${getMontoClass(e)}">$${e.toLocaleString('es-AR')}</td>
+                    <td>${index + 1}</td>
+                    <td><strong>${s.grado}</strong></td>
+                    <td>${s.nombre}</td>
+                    <td class="text-center ${n > 0 ? 'monto-pos' : ''}">${displayNov}</td>
+                    <td class="text-center ${d > 0 ? 'monto-pos' : ''}">${displayDic}</td>
+                    <td class="text-center ${e > 0 ? 'monto-pos' : ''}">${displayEne}</td>
                 </tr>`;
         });
 
-        const totalAportesSocios = tNov + tDic + tEne;
-        const pieTabla = document.getElementById("pie-tabla");
-        if(pieTabla) {
-            pieTabla.innerHTML = `
-                <tr class="row-subtotal">
-                    <td colspan="3" class="text-left">SUBTOTALES</td>
-                    <td class="text-center">$${tNov.toLocaleString('es-AR')}</td>
-                    <td class="text-center">$${tDic.toLocaleString('es-AR')}</td>
-                    <td class="text-center">$${tEne.toLocaleString('es-AR')}</td>
-                </tr>
-                <tr class="row-total-final">
-                    <td colspan="3" class="text-left">TOTAL INGRESOS ACUMULADOS</td>
-                    <td colspan="3" class="text-center">$${totalAportesSocios.toLocaleString('es-AR')}</td>
-                </tr>`;
-        }
-
-        const totalDebe = totalAportesSocios + FONDO_JULIO + INGRESO_EX_SOCIOS;
+        // Totales y Balance
+        const totalAportes = tNov + tDic + tEne;
+        const totalDebe = totalAportes + FONDO_JULIO + INGRESO_EX_SOCIOS;
         const totalHaber = GASTO_REGALO + GASTO_CENA;
         const saldoFinal = totalDebe - totalHaber;
-        
-        const cuerpoContable = document.getElementById("cuerpo-contable");
-        if(cuerpoContable) {
-            cuerpoContable.innerHTML = `
-                <tr><td class="text-left">Aportes Totales Recaudados</td><td class="text-center monto-pos">$${totalAportesSocios.toLocaleString('es-AR')}</td><td>-</td></tr>
-                <tr><td class="text-left">Fondo casino (Julio 2025)</td><td class="text-center monto-pos">$${FONDO_JULIO.toLocaleString('es-AR')}</td><td>-</td></tr>
-                <tr>
-                    <td class="text-left">Ex-Socios Casino de SSOO</td>
-                    <td class="text-center monto-pos">$${INGRESO_EX_SOCIOS.toLocaleString('es-AR')}</td>
-                    <td>-</td>
-                </tr>
-                <tr><td class="text-left">Regalo cambio de destino</td><td>-</td><td class="text-center monto-neg">$${GASTO_REGALO.toLocaleString('es-AR')}</td></tr>
-                <tr><td class="text-left">Cena de despedida</td><td>-</td><td class="text-center monto-neg">$${GASTO_CENA.toLocaleString('es-AR')}</td></tr>`;
-        }
 
-        const pieContable = document.getElementById("pie-contable");
-        if(pieContable) {
-            pieContable.innerHTML = `
-                <tr class="row-subtotal"><td class="text-left">SUBTOTALES</td><td class="text-center">$${totalDebe.toLocaleString('es-AR')}</td><td class="text-center">$${totalHaber.toLocaleString('es-AR')}</td></tr>
-                <tr class="row-total-final"><td class="text-left">SALDO FINAL (BALANCE NETO)</td><td colspan="2" class="text-center monto-blanco-total">$${saldoFinal.toLocaleString('es-AR')}</td></tr>`;
-        }
+        document.getElementById("pie-tabla").innerHTML = `
+            <tr class="row-total-final">
+                <td colspan="3">TOTAL ACUMULADO</td>
+                <td colspan="3" class="text-center">$${totalAportes.toLocaleString('es-AR')}</td>
+            </tr>`;
 
-        const chartCanvas = document.getElementById('aportesChart');
-        if(chartCanvas) {
-            const ctx = chartCanvas.getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Oct/Nov 2025', 'Dic 2025', 'Ene 2026'],
-                    datasets: [{ label: 'Ingresos Mensuales', data: [tNov, tDic, tEne], backgroundColor: '#1b4332' }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        }
+        document.getElementById("cuerpo-contable").innerHTML = `
+            <tr><td>Aportes Socios Activos</td><td class="text-center monto-pos">$${totalAportes.toLocaleString('es-AR')}</td><td>-</td></tr>
+            <tr><td>Fondo inicial (Julio 2025)</td><td class="text-center monto-pos">$${FONDO_JULIO.toLocaleString('es-AR')}</td><td>-</td></tr>
+            <tr><td>Ex-Socios Casino de SSOO</td><td class="text-center monto-pos">$${INGRESO_EX_SOCIOS.toLocaleString('es-AR')}</td><td>-</td></tr>
+            <tr><td>Regalos Cambio de Destino</td><td>-</td><td class="text-center monto-neg">$${GASTO_REGALO.toLocaleString('es-AR')}</td></tr>
+            <tr><td>Cena Camaradería</td><td>-</td><td class="text-center monto-neg">$${GASTO_CENA.toLocaleString('es-AR')}</td></tr>`;
+
+        document.getElementById("pie-contable").innerHTML = `
+            <tr class="row-total-final">
+                <td>SALDO FINAL (NETO)</td>
+                <td colspan="2" class="text-center">$${saldoFinal.toLocaleString('es-AR')}</td>
+            </tr>`;
+
+        renderChart([tNov, tDic, tEne]);
     }
 });
 
+// Funciones UI
+function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
 function abrirModal() { document.getElementById("modalGrafico").style.display = "flex"; }
 function cerrarModal() { document.getElementById("modalGrafico").style.display = "none"; }
 function abrirModalTransf() { document.getElementById("modalTransf").style.display = "flex"; }
 function cerrarModalTransf() { document.getElementById("modalTransf").style.display = "none"; }
 
-window.onclick = (e) => { 
-    if(e.target == document.getElementById("modalGrafico")) cerrarModal(); 
-    if(e.target == document.getElementById("modalTransf")) cerrarModalTransf(); 
+function renderChart(data) {
+    const ctx = document.getElementById('aportesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Oct/Nov', 'Diciembre', 'Enero'],
+            datasets: [{ label: 'Ingresos $', data: data, backgroundColor: '#1b4332' }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
 }
+
+/* LÓGICA DE MODALES Y NAVEGACIÓN */
+
+function toggleMenu() { 
+    document.getElementById('sidebar').classList.toggle('active'); 
+}
+
+// Abrir Modales
+function abrirModal() {
+    document.getElementById('modalGrafico').style.display = 'flex';
+}
+
+function abrirModalTransf() {
+    document.getElementById('modalTransf').style.display = 'flex';
+}
+
+// Cerrar Modales (Botón X)
+function cerrarModal() {
+    document.getElementById('modalGrafico').style.display = 'none';
+}
+
+function cerrarModalTransf() {
+    document.getElementById('modalTransf').style.display = 'none';
+}
+
+// Función para cerrar al hacer clic en el fondo oscuro (overlay)
+function cerrarSiClickFuera(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+        event.target.style.display = 'none';
+    }
+}
+
+// Soporte para cerrar con la tecla Escape
+window.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        const modalG = document.getElementById('modalGrafico');
+        const modalT = document.getElementById('modalTransf');
+        if (modalG) modalG.style.display = 'none';
+        if (modalT) modalT.style.display = 'none';
+    }
+});

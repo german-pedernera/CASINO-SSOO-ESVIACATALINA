@@ -18,20 +18,23 @@
                 <h1>CASINO DE OFICIALES</h1>
                 <h2>ESCUADRÓN SEGURIDAD VIAL “SANTA CATALINA”</h2>
             </div>
-            <a href="index.html" class="btn-back" title="Regresar a la pantalla principal">
+            <a href="index.html" class="btn-back">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
             </a>
         </div>
     </header>
 
     <main class="container">
-        <div class="section-header">
-            <button class="btn-chart" onclick="abrirModal()" title="Visualizar comparación gráfica">
+        <div class="section-header" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-chart" onclick="abrirModal()">
                 <i class="fas fa-chart-bar"></i> Ver Gráfico de Aportes
             </button>
-            <h3 class="section-title">Socios Activos</h3>
+            <button class="btn-chart" onclick="abrirModalTransf()" style="background-color: #2d6a4f;">
+                <i class="fas fa-university"></i> Datos para transferencia de cuotas socio Casino SSOO
+            </button>
         </div>
         
+        <h3 class="section-title">Socios Activos</h3>
         <div class="table-container" style="overflow-x: auto;">
             <table class="data-table">
                 <thead>
@@ -65,35 +68,39 @@
         </div>
 
         <div class="nav-container-centered">
-            <a href="documentacion.html" class="btn-docs-main" title="Ver comprobantes y actas">
-                <i class="fas fa-folder-open"></i> Documentación Respaldatoria
-            </a>
-            <a href="galeria.html" class="btn-docs-main" title="Ver fotos de eventos">
-                <i class="fas fa-camera-retro"></i> Galería Fotográfica
-            </a>
+            <a href="documentacion.html" class="btn-docs-main"><i class="fas fa-folder-open"></i> Documentación Respaldatoria</a>
+            <a href="galeria.html" class="btn-docs-main"><i class="fas fa-camera-retro"></i> Galería Fotográfica</a>
         </div>
     </main>
 
-    <footer class="main-footer">
-        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
-        <a href=https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO target="_blank" class="whatsapp-link">
-            <i class="fab fa-whatsapp"></i> Consultas vía WhatsApp
-        </a>
-    </footer>
-
     <div id="modalGrafico" class="modal-overlay">
         <div class="modal-card">
-            <span class="close-modal" onclick="cerrarModal()" title="Cerrar ventana">
-                <i class="fas fa-times"></i>
-            </span>
-            <div class="modal-header" style="text-align: center; margin-bottom: 20px;">
-                <h3>Aportes Mensuales Consolidados</h3>
+            <span class="close-modal" onclick="cerrarModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-header"><h3>Aportes Mensuales Consolidados</h3></div>
+            <div class="chart-container-modal" style="height: 300px;"><canvas id="aportesChart"></canvas></div>
+        </div>
+    </div>
+
+    <div id="modalTransf" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-modal" onclick="cerrarModalTransf()"><i class="fas fa-times"></i></span>
+            <div class="modal-header" style="text-align: center; border-bottom: 2px solid #2d6a4f; margin-bottom: 20px;">
+                <h3 style="color: #1b4332;">Información de Cuenta</h3>
             </div>
-            <div class="chart-container-modal" style="height: 400px;">
-                <canvas id="aportesChart"></canvas>
+            <div style="line-height: 2; font-size: 1.1rem; color: #333;">
+                <p><strong>Titular:</strong> Germán Andrés Ramírez Pedernera</p>
+                <p><strong>CUIT/CUIL:</strong> 20-32559315-7</p>
+                <p><strong>Alias:</strong> profepedernera</p>
+                <p><strong>CBU:</strong> 1430001713020634460010</p>
+                <p><strong>N.º de cuenta:</strong> 1302063446001</p>
             </div>
         </div>
     </div>
+
+    <footer class="main-footer">
+        <p>Casino de Oficiales - Escuadrón Seguridad Vial "SANTA CATALINA"</p>
+        <a href="https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Consultas vía WhatsApp</a>
+    </footer>
 
     <script src="script.js"></script>
 </body>

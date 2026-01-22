@@ -10,9 +10,7 @@
 </head>
 <body class="app-layout">
 
-    <button class="mobile-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
+    <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -20,20 +18,12 @@
             <h3>CASINO DE OFICIALES</h3>
         </div>
         <nav class="sidebar-nav">
-            <button onclick="window.location.href='index.html'" class="nav-item">
-                <i class="fas fa-home"></i> Inicio
-            </button>
-            <button onclick="window.location.href='dashboard.html'" class="nav-item">
-                <i class="fas fa-calculator"></i> Rendición de Cuenta
-            </button>
-            <button onclick="window.location.href='documentacion.html'" class="nav-item">
-                <i class="fas fa-folder-open"></i> Documentación
-            </button>
-            <button onclick="window.location.href='galeria.html'" class="nav-item">
-                <i class="fas fa-camera-retro"></i> Galería Fotográfica
-            </button>
-            <button onclick="window.location.href='cumpleanos.html'" class="nav-item active"><i class="fas fa-birthday-cake"></i> Fecha de Cumpleaños</button>
-            <button onclick="window.open('https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO', '_blank')" class="nav-item ws-nav-btn"><i class="fab fa-whatsapp"></i> WhatsApp "Casino SSOO"</button>
+            <button onclick="window.location.href='index.html'" class="nav-item"><i class="fas fa-home"></i> Inicio</button>
+            <button onclick="window.location.href='dashboard.html'" class="nav-item"><i class="fas fa-calculator"></i> Rendición</button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item"><i class="fas fa-folder-open"></i> Documentación</button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item"><i class="fas fa-camera-retro"></i> Galería</button>
+            <button onclick="window.location.href='cumpleanos.html'" class="nav-item active"><i class="fas fa-birthday-cake"></i> Cumpleaños</button>
+            <button onclick="window.open('https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO', '_blank')" class="nav-item ws-nav-btn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
         </nav>
     </aside>
 
@@ -43,18 +33,8 @@
             <p>Escuadrón Seguridad Vial "Santa Catalina"</p>
         </header>
 
-        <div class="dashboard-card" style="text-align: center; padding: 50px 20px; margin-bottom: 25px; border: 2px dashed #cbd5e1;">
-            <div style="font-size: 60px; color: #f59e0b; margin-bottom: 20px;">
-                <i class="fas fa-user-hard-hat"></i> <i class="fas fa-tools"></i>
-            </div>
-            <h3 style="color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">
-                ¡¡¡PROXIMAMENTE ESTARA DISPONIBLE CALENDARIO DE CUMPLEAÑOS DE LOS SOCIOS!!!
-            </h3>
-            <p style="color: #64748b; margin-top: 10px;">Estamos trabajando en la carga de datos del personal.</p>
-        </div>
-
         <div class="dashboard-card">
-            <h3 class="section-title" style="border-left: 4px solid var(--verde-claro); padding-left: 15px; margin-bottom: 20px;">Lista de Socios Activos</h3>
+            <h3 class="section-title" style="border-left: 4px solid var(--verde-claro); padding-left: 15px; margin-bottom: 20px;">Orden Cronológico</h3>
             <div class="table-container">
                 <table class="data-table">
                     <thead>
@@ -65,23 +45,13 @@
                             <th class="text-center">Fecha de Nacimiento</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>1er Alferez</td>
-                            <td>Germán Andrés Ramírez Pedernera</td>
-                            <td class="text-center" style="color: #94a3b8; font-style: italic;">Pendiente</td>
-                        </tr>
+                    <tbody id="cuerpo-cumpleanos">
                         </tbody>
                 </table>
             </div>
         </div>
     </main>
 
-    <script>
-        function toggleMenu() { 
-            document.getElementById('sidebar').classList.toggle('active'); 
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -3,57 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino de SSOO</title>
+    <title>Acceso - Casino de SSOO</title>
     <link rel="icon" href="/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="app-layout">
-    <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    <main class="main-content" style="margin-left: 0; width: 100%; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+        <div class="dashboard-card" style="text-align: center; padding: 40px; max-width: 400px; width: 90%;">
+            <img src="/logoEscuadron.jpeg" alt=" logo Escuadrón" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+            <h1 style="color: var(--verde-oscuro); margin-bottom: 5px;">BIENVENIDO</h1>
+            <h2 style="color: var(--verde-medio); font-weight: 400; margin-bottom: 25px; font-size: 1.2rem;">CASINO DE OFICIALES</h2>
+            
+            <div id="login-form" style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="text-align: left;">
+                    <label style="font-size: 0.8rem; color: #666; font-weight: bold;">USUARIO (MI)</label>
+                    <input type="text" id="user-input" placeholder="Ingrese su MI" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <div style="text-align: left;">
+                    <label style="font-size: 0.8rem; color: #666; font-weight: bold;">CONTRASEÑA (CE)</label>
+                    <input type="password" id="pass-input" placeholder="Ingrese su CE" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <button onclick="validarAcceso()" class="ws-btn" style="background-color: var(--verde-oscuro); width: 100%; padding: 12px; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px;">
+                    INGRESAR A RENDICIÓN
+                </button>
+                <p id="error-msg" style="color: red; font-size: 0.85rem; display: none; font-weight: bold; ">❌❌ Datos Incorrectos - Reintente Nuevamente. ❌❌</p>
+            </div>
 
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <span class="logo-icon">🏛️</span>
-            <h3>CASINO DE OFICIALES</h3>
-        </div>
-        <nav class="sidebar-nav">
-            <button onclick="window.location.href='index.html'" class="nav-item active">
-                <i class="fas fa-home"></i> Inicio
-            </button>
-            <button onclick="window.location.href='dashboard.html'" class="nav-item">
-                <i class="fas fa-calculator"></i> Rendición
-            </button>
-            <button onclick="window.location.href='documentacion.html'" class="nav-item">
-                <i class="fas fa-folder-open"></i> Documentación
-            </button>
-            <button onclick="window.location.href='galeria.html'" class="nav-item">
-                <i class="fas fa-images"></i> Galería
-            </button>
-            <button onclick="window.location.href='cumpleanos.html'" class="nav-item">
-                <i class="fas fa-birthday-cake"></i> Fecha de Cumpleaños
-            </button>
-            <button onclick="window.open('https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO', '_blank')" class="nav-item ws-nav-btn">
-                <i class="fab fa-whatsapp"></i> WhatsApp "Casino SSOO"
-            </button>
-        </nav>
-    </aside>
-
-    <main class="main-content">
-        <div class="dashboard-card" style="text-align: center; padding: 50px 20px;">
-            <div style="font-size: 60px; margin-bottom: 20px;">🏛️</div>
-            <h1 style="color: var(--verde-oscuro); margin-bottom: 10px;">BIENVENIDO</h1>
-            <h2 style="color: var(--verde-medio); font-weight: 400; margin-bottom: 30px;">CASINO DE OFICIALES</h2>
-            <p style="color: #666; max-width: 500px; margin: 0 auto 40px; line-height: 1.6;">
-                Escuadrón Seguridad Vial "SANTA CATALINA".<br>
-                Acceda al panel de rendición para consultar el balance contable y aportes de socios.
+            <p style="color: #888; margin-top: 30px; font-size: 0.8rem; line-height: 1.4;">
+                Escuadrón Seguridad Vial <br>"SANTA CATALINA"<br>
+                Gendarmería Nacional Argentina
             </p>
-            <a href="dashboard.html" class="nav-item" style="display: inline-flex; width: auto; background: var(--verde-claro); color: white; padding: 15px 40px; border-radius: 30px; text-decoration: none;">
-                Ver Rendición de Cuentas
-            </a>
         </div>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>

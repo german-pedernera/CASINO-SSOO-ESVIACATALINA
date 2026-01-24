@@ -1,3 +1,36 @@
+// Base de datos de usuarios (Cargada desde tu archivo Excel)
+const USUARIOS_DB = [
+    { user: "27433769", pass: "63864", nombre: "SKIEBACK, Jose Marcelo" },
+    { user: "33142786", pass: "74118", nombre: "MAMAN ORFALI, Cristian" },
+    { user: "30819237", pass: "88908", nombre: "FAID, Claudia Yamil" },
+    { user: "35564716", pass: "102529", nombre: "ORDOÑE, Maria Florencia" },
+    { user: "33959981", pass: "109236", nombre: "RABBIA, Romina Soledad" },
+    { user: "32559315", pass: "70965", nombre: "PEDERNERA, German Andres" },
+    { user: "43207906", pass: "108872", nombre: "CORONEL, Brisa Nerea" },
+    { user: "43452851", pass: "109403", nombre: "ROLON, Facundo Nahuel" },
+    { user: "43633792", pass: "113099", nombre: "VERA, Ramiro Alejandro" },
+    { user: "31846298", pass: "80764", nombre: "MEDRANO, Pablo Martin" },
+    { user: "32557567", pass: "72512", nombre: "CABALLERO, Ramon Rodolfo" },
+    { user: "40516063", pass: "109419", nombre: "SOTO, Enzo Gaston" }
+];
+
+// Función de Validación de Acceso
+function validarAcceso() {
+    const userIn = document.getElementById('user-input').value.trim();
+    const passIn = document.getElementById('pass-input').value.trim();
+    const errorMsg = document.getElementById('error-msg');
+
+    const usuarioEncontrado = USUARIOS_DB.find(u => u.user === userIn && u.pass === passIn);
+
+    if (usuarioEncontrado) {
+        localStorage.setItem('sesionActiva', usuarioEncontrado.nombre);
+        window.location.href = 'dashboard.html';
+    } else {
+        errorMsg.style.display = 'block';
+    }
+}
+
+
 // Constantes de montos
 const MONTO_NOV = 40000;
 const MONTO_GRAL = 20000;
@@ -113,3 +146,4 @@ function renderChart(data) {
         options: { responsive: true, maintainAspectRatio: false }
     });
 }
+

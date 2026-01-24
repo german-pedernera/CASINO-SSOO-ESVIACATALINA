@@ -235,3 +235,16 @@ body.app-layout {
     background-color: #128c7e;
 }
 
+/* ... mantener todo tu CSS anterior y agregar esto al final ... */
+
+.main-content {
+    transition: margin-left 0.3s ease;
+    width: 100%;
+}
+
+/* Estilo para los inputs del login */
+#login-form input:focus {
+    outline: none;
+    border-color: var(--verde-claro);
+    box-shadow: 0 0 5px rgba(45, 106, 79, 0.2);
+}

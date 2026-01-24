@@ -16,7 +16,7 @@ const MESES = {
 const socios = [
     { grado: "CTE PR", nombre: "SKIEBACK JOSE MARCELO", nov: true, dic: true, ene: true, cumple: "26 ABRIL 1979" },
     { grado: "2DO CTE", nombre: "MAMAN ORFALI CRISTIAN", nov: true, dic: true, ene: true, cumple: "14 JUNIO 1987" },
-    { grado: "2DO CTE", nombre: "FAIAD CLAUDIA YAMIL", nov: true, dic: true, ene: true, cumple: "03 MARZO 1984" },
+    { grado: "2DO CTE", nombre: "FAIAD CLAUDIA YAMIL", nov: true, dic: true, ene: true, cumple: "05 MARZO 1984" },
     { grado: "2DO CTE", nombre: "ORDOÑEZ MARÍA FLORENCIA", nov: true, dic: true, ene: true, cumple: "13 DICIEMBRE 1990" },
     { grado: "1ER ALF", nombre: "MEDRANO PABLO MARTIN", nov: true, dic: true, ene: false, cumple: "19 MARZO 1986" },
     { grado: "1ER ALF", nombre: "CABALLERO RAMON RODOLFO", nov: false, dic: true, ene: true, cumple: "27 JUNIO 1987" },

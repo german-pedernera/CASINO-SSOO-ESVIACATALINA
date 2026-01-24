@@ -1,4 +1,4 @@
-// Base de datos de usuarios (Cargada desde tu archivo Excel)
+// Base de datos de usuarios
 const USUARIOS_DB = [
     { user: "27433769", pass: "63864", nombre: "SKIEBACK, Jose Marcelo" },
     { user: "33142786", pass: "74118", nombre: "MAMAN ORFALI, Cristian" },
@@ -14,24 +14,7 @@ const USUARIOS_DB = [
     { user: "40516063", pass: "109419", nombre: "SOTO, Enzo Gaston" }
 ];
 
-// Función de Validación de Acceso
-function validarAcceso() {
-    const userIn = document.getElementById('user-input').value.trim();
-    const passIn = document.getElementById('pass-input').value.trim();
-    const errorMsg = document.getElementById('error-msg');
-
-    const usuarioEncontrado = USUARIOS_DB.find(u => u.user === userIn && u.pass === passIn);
-
-    if (usuarioEncontrado) {
-        localStorage.setItem('sesionActiva', usuarioEncontrado.nombre);
-        window.location.href = 'dashboard.html';
-    } else {
-        errorMsg.style.display = 'block';
-    }
-}
-
-
-// Constantes de montos
+// Configuración de montos
 const MONTO_NOV = 40000;
 const MONTO_GRAL = 20000;
 const FONDO_JULIO = 60000;
@@ -39,13 +22,11 @@ const INGRESO_EX_SOCIOS = 40000;
 const GASTO_REGALO = 130000;
 const GASTO_CENA = 407000;
 
-// Mapeo de meses para ordenamiento
 const MESES = {
     "ENERO": 1, "FEBRERO": 2, "MARZO": 3, "ABRIL": 4, "MAYO": 5, "JUNIO": 6,
     "JULIO": 7, "AGOSTO": 8, "SEPTIEMBRE": 9, "OCTUBRE": 10, "NOVIEMBRE": 11, "DICIEMBRE": 12
 };
 
-// Lista de socios con fecha de nacimiento para el calendario
 const socios = [
     { grado: "CTE PR", nombre: "SKIEBACK JOSE MARCELO", nov: true, dic: true, ene: true, cumple: "26 ABRIL 1979" },
     { grado: "2DO CTE", nombre: "MAMAN ORFALI CRISTIAN", nov: true, dic: true, ene: true, cumple: "14 JUNIO 1987" },
@@ -65,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cuerpoRendicion = document.getElementById("cuerpo-tabla");
     const cuerpoCumpleanos = document.getElementById("cuerpo-cumpleanos");
 
-    // Lógica para la Tabla de Rendición (dashboard.html)
+    // Renderizado de Rendición Contable
     if (cuerpoRendicion) {
         let tNov = 0, tDic = 0, tEne = 0;
         socios.forEach((s, index) => {
@@ -89,29 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const saldoFinal = (totalAportes + FONDO_JULIO + INGRESO_EX_SOCIOS) - (GASTO_REGALO + GASTO_CENA);
 
         document.getElementById("pie-tabla").innerHTML = `<tr class="row-total-final"><td colspan="3">TOTAL ACUMULADO</td><td colspan="3" class="text-center">$${totalAportes.toLocaleString('es-AR')}</td></tr>`;
+        
         document.getElementById("cuerpo-contable").innerHTML = `
             <tr><td>Aportes Socios Activos</td><td class="text-center monto-pos">$${totalAportes.toLocaleString('es-AR')}</td><td>-</td></tr>
             <tr><td>Fondo inicial (Julio 2025)</td><td class="text-center monto-pos">$${FONDO_JULIO.toLocaleString('es-AR')}</td><td>-</td></tr>
             <tr><td>Ex-Socios Casino de SSOO</td><td class="text-center monto-pos">$${INGRESO_EX_SOCIOS.toLocaleString('es-AR')}</td><td>-</td></tr>
             <tr><td>Regalos Cambio de Destino</td><td>-</td><td class="text-center monto-neg">$${GASTO_REGALO.toLocaleString('es-AR')}</td></tr>
             <tr><td>Cena Camaradería</td><td>-</td><td class="text-center monto-neg">$${GASTO_CENA.toLocaleString('es-AR')}</td></tr>`;
+        
         document.getElementById("pie-contable").innerHTML = `<tr class="row-total-final"><td>SALDO FINAL (NETO)</td><td colspan="2" class="text-center">$${saldoFinal.toLocaleString('es-AR')}</td></tr>`;
         
-        renderChart([tNov, tDic, tEne]);
+        if (typeof Chart !== 'undefined') renderChart([tNov, tDic, tEne]);
     }
 
-    // Lógica para el Calendario de Cumpleaños (cumpleanos.html)
+    // Renderizado de Cumpleaños
     if (cuerpoCumpleanos) {
         const sociosOrdenados = [...socios].sort((a, b) => {
             const partesA = a.cumple.split(" ");
             const partesB = b.cumple.split(" ");
-            const diaA = parseInt(partesA[0]);
             const mesA = MESES[partesA[1].toUpperCase()];
-            const diaB = parseInt(partesB[0]);
             const mesB = MESES[partesB[1].toUpperCase()];
-
             if (mesA !== mesB) return mesA - mesB;
-            return diaA - diaB;
+            return parseInt(partesA[0]) - parseInt(partesB[0]);
         });
 
         sociosOrdenados.forEach((s, index) => {
@@ -126,13 +106,58 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Funciones Globales
+// --- Funciones Globales ---
+function validarAcceso() {
+    const userIn = document.getElementById('user-input').value.trim();
+    const passIn = document.getElementById('pass-input').value.trim();
+    const errorMsg = document.getElementById('error-msg');
+    const usuarioEncontrado = USUARIOS_DB.find(u => u.user === userIn && u.pass === passIn);
+
+    if (usuarioEncontrado) {
+        localStorage.setItem('sesionActiva', usuarioEncontrado.nombre);
+        window.location.href = 'dashboard.html';
+    } else {
+        errorMsg.style.display = 'block';
+    }
+}
+
+function cerrarSesion() {
+    localStorage.removeItem('sesionActiva');
+    const modal = document.getElementById('modalCierre');
+    if (modal) {
+        modal.style.display = 'flex';
+        modal.style.opacity = "1";
+        setTimeout(() => { window.location.href = 'index.html'; }, 2500);
+    } else {
+        window.location.href = 'index.html';
+    }
+}
+
+function abrirModal() {
+    const modal = document.getElementById("modalGrafico");
+    modal.style.display = "flex";
+    setTimeout(() => modal.style.opacity = "1", 10);
+}
+
+function cerrarModal() {
+    const modal = document.getElementById("modalGrafico");
+    modal.style.opacity = "0";
+    setTimeout(() => modal.style.display = "none", 400);
+}
+
+function abrirModalTransf() {
+    const modal = document.getElementById("modalTransf");
+    modal.style.display = "flex";
+    setTimeout(() => modal.style.opacity = "1", 10);
+}
+
+function cerrarModalTransf() {
+    const modal = document.getElementById("modalTransf");
+    modal.style.opacity = "0";
+    setTimeout(() => modal.style.display = "none", 400);
+}
+
 function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
-function abrirModal() { document.getElementById("modalGrafico").style.display = "flex"; }
-function cerrarModal() { document.getElementById("modalGrafico").style.display = "none"; }
-function abrirModalTransf() { document.getElementById("modalTransf").style.display = "flex"; }
-function cerrarModalTransf() { document.getElementById("modalTransf").style.display = "none"; }
-function cerrarSiClickFuera(event) { if (event.target.classList.contains('modal-overlay')) event.target.style.display = 'none'; }
 
 function renderChart(data) {
     const canvas = document.getElementById('aportesChart');
@@ -146,4 +171,3 @@ function renderChart(data) {
         options: { responsive: true, maintainAspectRatio: false }
     });
 }
-

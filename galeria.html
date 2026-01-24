@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="app-layout">
-
-    <button class="mobile-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
+    <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -20,23 +17,13 @@
             <h3>CASINO DE OFICIALES</h3>
         </div>
         <nav class="sidebar-nav">
-            <button onclick="window.location.href='index.html'" class="nav-item">
-                <i class="fas fa-home"></i> Inicio
-            </button>
-            <button onclick="window.location.href='dashboard.html'" class="nav-item">
-                <i class="fas fa-calculator"></i> Rendición de Cuenta
-            </button>
-            <button onclick="window.location.href='documentacion.html'" class="nav-item">
-                <i class="fas fa-folder-open"></i> Documentación
-            </button>
-            <button onclick="window.location.href='galeria.html'" class="nav-item active">
-                <i class="fas fa-camera-retro"></i> Galería Fotográfica
-            </button>
-                        <button onclick="window.location.href='cumpleanos.html'" class="nav-item"><i class="fas fa-birthday-cake"></i> Fecha de Cumpleaños</button>
-                   <button onclick="window.open('https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO', '_blank')" class="nav-item ws-nav-btn">
-                <i class="fab fa-whatsapp"></i> WhatsApp "Casino SSOO"
-            </button>
-            </nav>
+            <button onclick="window.location.href='dashboard.html'" class="nav-item"><i class="fas fa-calculator"></i> Rendición</button>
+            <button onclick="window.location.href='documentacion.html'" class="nav-item"><i class="fas fa-folder-open"></i> Documentación</button>
+            <button onclick="window.location.href='galeria.html'" class="nav-item active"><i class="fas fa-camera-retro"></i> Galería</button>
+            <button onclick="window.location.href='cumpleanos.html'" class="nav-item"><i class="fas fa-birthday-cake"></i> Cumpleaños</button>
+            <button onclick="window.open('https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO', '_blank')" class="nav-item ws-nav-btn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+            <button onclick="cerrarSesion()" class="nav-item" style="margin-top: 20px; color: #ffb3b3;"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+        </nav>
     </aside>
 
     <main class="main-content">
@@ -74,9 +61,17 @@
         </div>
     </main>
 
+    <div id="modalCierre" class="modal-overlay">
+        <div class="modal-card" style="text-align: center;">
+            <i class="fas fa-sign-out-alt fa-spin" style="font-size: 3rem; color: var(--verde-oscuro); margin-bottom: 20px;"></i>
+            <h3>Cerrando Sesión...</h3>
+            <h4>Muchas Gracias por visitar la App del casino de oficiales</h2>
+            <h4>Escuadrón Seguridad Vial "Santa Catalina"</h2>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
     <script>
-        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
-        
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide img');
         function changeSlide(direction) {

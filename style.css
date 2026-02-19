@@ -1,212 +1,277 @@
-/* Variables de color institucionales */
 :root {
-    --verde-oscuro: #0d3b2e;
-    --verde-medio: #1b4332;
-    --verde-claro: #2d6a4f;
+    --verde-oscuro: #1b4332;
+    --verde-medio: #2d6a4f;
+    --verde-claro: #40916c;
     --blanco: #ffffff;
-    --gris-fondo: #f4f7f6;
-    --sidebar-width: 260px;
-    --monto-pos: #386641;
-    --monto-neg: #bc4749;
+    --gris-fondo: #f8fafc;
 }
 
-/* Reset y Estilos Base */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Segoe UI', system-ui, sans-serif; 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body.app-layout {
-    display: flex;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--gris-fondo);
-    min-height: 100vh;
-    overflow-x: hidden;
+    padding-bottom: 100px;
+    color: #333;
 }
 
-/* --- Animación de Logo (Index) --- */
-.logo-animado {
-    animation: fadeInDown 1.2s ease-out, floating 3s ease-in-out infinite;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-@keyframes floating {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes fadeInDown {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-/* --- Barra Lateral (Sidebar) --- */
-.sidebar {
-    width: var(--sidebar-width);
-    background-color: var(--verde-oscuro);
-    color: white;
-    height: 100vh;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.sidebar-header { 
-    padding: 20px; 
-    text-align: center; 
-    border-bottom: 1px solid rgba(255,255,255,0.1); 
-}
-
-.sidebar-nav { 
-    flex: 1; 
-    padding: 15px 10px; 
-}
-
-.nav-item {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 5px;
-    background: transparent;
-    border: none;
-    color: #cbd5e0;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    transition: 0.2s;
-    text-decoration: none;
-}
-
-.nav-item:hover, .nav-item.active { 
-    background: var(--verde-medio); 
-    color: white; 
-}
-
-.nav-item i { 
-    margin-right: 12px; 
-    width: 20px; 
-    text-align: center; 
-}
-
-/* --- Contenido Principal --- */
 .main-content {
-    margin-left: var(--sidebar-width);
-    flex: 1;
+    padding: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dashboard-card {
+    background: var(--blanco);
     padding: 20px;
-    width: 100%;
-    max-width: calc(100vw - var(--sidebar-width));
-    transition: margin-left 0.3s ease;
-}
-
-.dashboard-card { 
-    background: white; 
-    padding: 25px; 
-    border-radius: 12px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    height: auto; /* Permite que la card crezca con la lista completa */
-}
-
-/* --- Tablas --- */
-.table-container { 
-    width: 100%; 
-    overflow-x: auto; /* Permite scroll lateral en móviles si la tabla es ancha */
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     margin-bottom: 20px;
 }
 
-.data-table { 
-    width: 100%; 
-    border-collapse: collapse; 
+.table-container {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
     font-size: 0.9rem;
 }
 
-.data-table th, .data-table td { 
-    padding: 12px 8px; 
-    border-bottom: 1px solid #edf2f7; 
+.data-table th, .data-table td {
+    padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #edf2f7;
 }
 
-.data-table th { 
-    background: #f8fafc; 
-    color: var(--verde-oscuro); 
+.data-table th {
+    background: #f1f5f9;
+    color: var(--verde-oscuro);
+    font-weight: 600;
+    white-space: nowrap;
 }
 
-.text-center { text-align: center !important; }
-.monto-pos { color: var(--monto-pos); font-weight: bold; }
-.monto-neg { color: var(--monto-neg); font-weight: bold; }
-.row-total-final { 
-    background-color: var(--verde-oscuro); 
-    color: white; 
-    font-weight: bold; 
-}
+.text-center { text-align: center; }
 
-/* --- Botones --- */
+.monto-pos { color: #2e7d32; font-weight: bold; }
+.monto-neg { color: #c62828; font-weight: bold; }
+
+/* Botones */
 .ws-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    gap: 10px;
+}
+
+.ws-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Menú Flotante */
+.floating-menu {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
     padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    gap: 15px;
+    z-index: 1000;
+}
+
+.nav-item {
     text-decoration: none;
-    font-weight: bold;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
+    color: #64748b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+    background: none;
     border: none;
     cursor: pointer;
-    gap: 8px;
 }
 
-/* --- Modales --- */
-.modal-overlay { 
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(0,0,0,0.7); 
-    z-index: 2000; 
-    align-items: center; 
+.nav-item i { font-size: 1.2rem; margin-bottom: 4px; }
+.nav-item.active { color: var(--verde-oscuro); font-weight: bold; }
+
+/* Modales */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.4s ease; 
+    align-items: center;
+    z-index: 2000;
 }
 
-.modal-card { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 12px; 
-    width: 90%; 
-    max-width: 500px; 
+.modal-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
     position: relative;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
 }
 
-/* --- Responsividad --- */
-.mobile-toggle { 
-    display: none; 
-    position: fixed; 
-    top: 15px; 
-    right: 15px; 
-    background: var(--verde-oscuro); 
-    color: white; 
-    border: none; 
-    padding: 10px; 
-    border-radius: 6px; 
-    z-index: 1100; 
+.close-modal {
+    position: absolute;
+    top: 15px; right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
-@media (max-width: 992px) {
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.active { transform: translateX(0); }
-    .main-content { margin-left: 0; max-width: 100vw; padding-top: 70px; }
-    .mobile-toggle { display: block; }
-    .data-table { font-size: 0.75rem; }
+.admin-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* MODO EDICIÓN */
+[contenteditable="true"] {
+    background-color: #fffde7 !important;
+    outline: 2px solid #fbc02d;
+    cursor: cell;
+}
+
+[contenteditable="true"]:focus {
+    background-color: #ffffff !important;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.no-editable {
+    background-color: #f8fafc !important;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+/* Estilos para Alertas Personalizadas */
+.custom-alert-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+.custom-alert-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 85%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Mejora de Responsividad para Tablas */
+@media (max-width: 600px) {
+    .main-content { padding: 10px; }
+    .dashboard-card { padding: 15px; }
+    .data-table { font-size: 0.8rem; }
+    .data-table th, .data-table td { padding: 8px 5px; }
+    
+    .floating-menu {
+        width: 95%;
+        padding: 8px 10px;
+        gap: 5px;
+    }
+    
+    .nav-item span { font-size: 0.6rem; }
+}
+
+/* Scroll suave para tablas en móvil */
+.table-container {
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}
+
+/* Busca esta sección en tu style.css */
+@media (max-width: 600px) {
+    .main-content { padding: 10px; }
+    .dashboard-card { padding: 15px; }
+    .data-table { font-size: 0.8rem; }
+    .data-table th, .data-table td { padding: 8px 5px; }
+    
+    /* Ajuste para centrado perfecto del menú */
+    .floating-menu {
+        width: 90%;            /* Ocupa casi todo el ancho disponible */
+        max-width: 400px;      /* Pero no se estira demasiado en tablets */
+        left: 50% !important;  /* Forzamos el punto de anclaje al centro */
+        bottom: 15px;          /* Un poco más cerca del borde inferior */
+        transform: translateX(-50%) !important; /* Lo mueve a la izquierda la mitad de su propio ancho */
+        padding: 8px 15px;
+        gap: 8px;
+        justify-content: space-around; /* Distribuye los íconos equitativamente */
+    }
+    
+    .nav-item span { font-size: 0.6rem; }
+}
+
+/* Contenedor de los botones de documentos */
+.docs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Estilo de Botón Flotante */
+.doc-button-floating {
+    display: flex;
+    align-items: center;
+    background: var(--blanco);
+    color: var(--verde-oscuro);
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    border-left: 5px solid var(--verde-claro);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para efecto flotante */
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.doc-button-floating i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: var(--verde-medio);
+}
+
+/* Efecto al pasar el mouse (hover) */
+.doc-button-floating:hover {
+    transform: translateY(-5px); /* Se eleva un poco más */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: #f0fdf4; /* Un toque de verde muy suave */
+    color: var(--verde-medio);
+}
+
+/* Efecto al hacer clic */
+.doc-button-floating:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

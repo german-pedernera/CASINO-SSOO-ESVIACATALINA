@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso - Casino de SSOO</title>
-    <link rel="icon" href="/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="app-layout">
-    <main class="main-content" style="margin-left: 0; width: 100%; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+    <main class="main-content" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0 auto;">
         <div class="dashboard-card" style="text-align: center; padding: 40px; max-width: 400px; width: 90%;">
-<img src="/logoEscuadron.jpeg" alt=" logo Escuadrón" class="logo-animado" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+            <img src="logoEscuadron.jpeg" alt="logo Escuadrón" class="logo-animado" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
             <h1 style="color: var(--verde-oscuro); margin-bottom: 5px;">BIENVENIDO</h1>
             <h2 style="color: var(--verde-medio); font-weight: 400; margin-bottom: 25px; font-size: 1.2rem;">CASINO DE OFICIALES</h2>
             
@@ -25,18 +24,17 @@
                     <label style="font-size: 0.8rem; color: #666; font-weight: bold;">CONTRASEÑA (CE)</label>
                     <input type="password" id="pass-input" placeholder="Ingrese su CE" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
                 </div>
-                <button onclick="validarAcceso()" class="ws-btn" style="background-color: var(--verde-oscuro); width: 100%; padding: 12px; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px;">
+                <button onclick="validarAcceso()" class="ws-btn" style="background-color: var(--verde-oscuro);">
                     INGRESAR A RENDICIÓN
                 </button>
-                <p id="error-msg" style="color: red; font-size: 0.85rem; display: none; font-weight: bold; ">❌ Datos Incorrectos - <br>*** Reintente Nuevamente *** </p>
+                <p id="error-msg" style="color: red; font-size: 0.85rem; display: none; font-weight: bold;">❌ Datos Incorrectos - Reintente</p>
             </div>
-
-            <p style="color: #888; margin-top: 30px; font-size: 0.8rem; line-height: 1.4;">
-                Escuadrón Seguridad Vial <br>"SANTA CATALINA"<br>
-                Gendarmería Nacional Argentina
+            <p style="color: #888; margin-top: 30px; font-size: 0.8rem;">
+                Escuadrón Seguridad Vial "SANTA CATALINA"<br>Gendarmería Nacional Argentina
             </p>
         </div>
     </main>
     <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

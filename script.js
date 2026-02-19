@@ -2263,3 +2263,119 @@ function guardarCambiosEdicion() {
         alert("Hubo un error al sincronizar con Firebase.");
     });
 }
+
+// Función para guardar los cambios de los Socios en Firebase
+function guardarCambiosEdicion() {
+    const tabla = document.getElementById('cuerpo-tabla');
+    const filas = tabla.querySelectorAll('tr');
+    const datosSocios = [];
+
+    filas.forEach(fila => {
+        const celdas = fila.querySelectorAll('td');
+        if (celdas.length > 0) {
+            datosSocios.push({
+                nro: celdas[0].innerText,
+                grado: celdas[1].innerText,
+                nombre: celdas[2].innerText
+                // Aquí puedes agregar los meses si los estás guardando por celda
+            });
+        }
+    });
+
+    // Guardar en el nodo 'socios' de tu Realtime Database
+    db.ref('socios').set(datosSocios)
+        .then(() => {
+            alert("¡Planilla de Socios guardada en la nube con éxito!");
+            document.getElementById('btnGuardarCambios').style.display = 'none';
+        })
+        .catch(error => console.error("Error al guardar socios:", error));
+}
+
+// Función para guardar el Libro de Caja en Firebase
+function guardarCambiosCaja() {
+    const cuerpoContable = document.getElementById('cuerpo-contable');
+    const filas = cuerpoContable.querySelectorAll('tr');
+    const movimientos = [];
+
+    filas.forEach(fila => {
+        const celdas = fila.querySelectorAll('td');
+        if (celdas.length > 0) {
+            movimientos.push({
+                detalle: celdas[0].innerText,
+                ingreso: celdas[1].innerText,
+                egreso: celdas[2].innerText,
+                saldo: celdas[3].innerText
+            });
+        }
+    });
+
+    // Guardar en el nodo 'caja'
+    db.ref('caja').set(movimientos)
+        .then(() => {
+            alert("¡Libro de Caja actualizado correctamente!");
+            document.getElementById('btnGuardarCambiosCaja').style.display = 'none';
+        })
+        .catch(error => console.error("Error al guardar caja:", error));
+}
+
+let chartSocios, chartCaja;
+
+function abrirModalGrafico() {
+    document.getElementById('modalGrafico').style.display = 'flex';
+    generarGraficos();
+}
+
+function generarGraficos() {
+    // 1. Datos para el Gráfico de Socios (Estado de Pagos)
+    const cuerpoSocios = document.getElementById('cuerpo-tabla');
+    const filasSocios = cuerpoSocios.querySelectorAll('tr');
+    let pagados = 0, pendientes = 0;
+
+    filasSocios.forEach(fila => {
+        // Asumiendo que la última celda indica si pagó (ej: "S" o "N")
+        const texto = fila.innerText.toLowerCase();
+        if (texto.includes('si') || texto.includes('$')) pagados++;
+        else pendientes++;
+    });
+
+    const ctxSocios = document.getElementById('chartSocios').getContext('2d');
+    if (chartSocios) chartSocios.destroy();
+    chartSocios = new Chart(ctxSocios, {
+        type: 'doughnut',
+        data: {
+            labels: ['Al Día', 'Pendientes'],
+            datasets: [{
+                data: [pagados, pendientes],
+                backgroundColor: ['#27ae60', '#e74c3c']
+            }]
+        },
+        options: { plugins: { title: { display: true, text: 'Estado de Cuota Social' } } }
+    });
+
+    // 2. Datos para el Gráfico de Caja (Ingresos vs Egresos)
+    const pieContable = document.getElementById('pie-contable');
+    const celdasTotales = pieContable.querySelectorAll('td');
+    
+    // Extraemos los números de los totales del pie de tabla
+    const totalIngreso = parseFloat(celdasTotales[1].innerText.replace('$', '')) || 0;
+    const totalEgreso = parseFloat(celdasTotales[2].innerText.replace('$', '')) || 0;
+
+    const ctxCaja = document.getElementById('chartCaja').getContext('2d');
+    if (chartCaja) chartCaja.destroy();
+    chartCaja = new Chart(ctxCaja, {
+        type: 'bar',
+        data: {
+            labels: ['Ingresos', 'Egresos'],
+            datasets: [{
+                label: 'Balance en Pesos ($)',
+                data: [totalIngreso, totalEgreso],
+                backgroundColor: ['#2980b9', '#c0392b']
+            }]
+        },
+        options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { title: { display: true, text: 'Balance Comparativo' } } 
+        }
+    });
+}

@@ -2247,3 +2247,19 @@ function recalcularSaldoFinalCaja() {
         verificarSaludFinanciera(saldoFinal);
     }
 }
+
+function guardarCambiosEdicion() {
+    // 1. Obtener los datos de la tabla
+    const datosSocios = []; // ... lógica para extraer datos de las celdas ...
+    
+    // 2. Guardar en Firebase
+    db.ref('socios').set(datosSocios)
+    .then(() => {
+        alert("¡Datos guardados exitosamente en la nube!");
+        document.getElementById('btnGuardarCambios').style.display = 'none';
+    })
+    .catch((error) => {
+        console.error("Error al guardar:", error);
+        alert("Hubo un error al sincronizar con Firebase.");
+    });
+}

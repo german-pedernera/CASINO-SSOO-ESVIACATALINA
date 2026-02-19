@@ -11,39 +11,40 @@
 </head>
 <body class="app-layout">
     <main class="main-content">
-<header class="content-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="logoEscuadron.jpeg" alt="logo" style="width: 60px; height: 60px; border-radius: 50%;">
-        <div style="text-align: left;">
-            <h2 style="color: var(--verde-oscuro); margin: 0; font-size: 1.2rem;">Rendición Contable</h2>
-            <p style="margin: 0; font-size: 0.9rem;">Escuadrón "Santa Catalina"</p>
+        <header class="content-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="logoEscuadron.jpeg" alt="logo" style="width: 60px; height: 60px; border-radius: 50%;">
+                <div style="text-align: left;">
+                    <h2 style="color: var(--verde-oscuro); margin: 0; font-size: 1.2rem;">Rendición Contable</h2>
+                    <p style="margin: 0; font-size: 0.9rem;">Escuadrón "Santa Catalina"</p>
+                </div>
+            </div>
+            <button onclick="abrirModalGrafico()" class="ws-btn" style="background: var(--verde-medio); padding: 8px 15px; width: auto; font-size: 0.9rem;">
+                <i class="fas fa-chart-pie"></i> VER GRÁFICOS
+            </button>
+        </header>
+
+        <div class="dashboard-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="color: var(--verde-oscuro); margin: 0;"><i class="fas fa-users"></i> Socios Activos</h3>
+                <button id="btnGuardarCambios" onclick="guardarCambiosEdicion()" class="ws-btn" style="display: none; background: #27ae60; padding: 5px 15px; width: auto;">
+                    <i class="fas fa-save"></i> Guardar Planilla
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="tabla-socios">
+                    <thead>
+                        <tr id="header-row-socios">
+                            <th>Nro</th>
+                            <th>Grado</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla"></tbody>
+                    <tfoot id="pie-socios"></tfoot>
+                </table>
+            </div>
         </div>
-    </div>
-    <button onclick="abrirModalGrafico()" class="ws-btn" style="background: var(--verde-medio); padding: 8px 15px; width: auto; font-size: 0.9rem;">
-        <i class="fas fa-chart-pie"></i> VER GRÁFICOS
-    </button>
-</header>
-<div class="dashboard-card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h3 style="color: var(--verde-oscuro); margin: 0;"><i class="fas fa-users"></i> Socios Activos</h3>
-        <button id="btnGuardarCambios" onclick="guardarCambiosEdicion()" class="ws-btn" style="display: none; background: #27ae60; padding: 5px 15px; width: auto;">
-            <i class="fas fa-save"></i> Guardar Planilla
-        </button>
-    </div>
-    <div class="table-container">
-        <table class="data-table" id="tabla-socios">
-            <thead>
-                <tr id="header-row-socios">
-                    <th>Nro</th>
-                    <th>Grado</th>
-                    <th>Nombre</th>
-                </tr>
-            </thead>
-            <tbody id="cuerpo-tabla"></tbody>
-            <tfoot id="pie-socios"></tfoot>
-        </table>
-    </div>
-</div>
 
         <div class="dashboard-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -63,8 +64,7 @@
                         </tr>
                     </thead>
                     <tbody id="cuerpo-contable"></tbody>
-                    <tfoot id="pie-contable" style="background: #f1f5f9; font-weight: bold;">
-                        </tfoot>
+                    <tfoot id="pie-contable" style="background: #f1f5f9; font-weight: bold;"></tfoot>
                 </table>
             </div>
         </div>
@@ -85,24 +85,14 @@
             <h3 style="margin-bottom: 20px; color: var(--verde-oscuro); border-bottom: 2px solid var(--verde-claro); padding-bottom: 10px;">
                 <i class="fas fa-tools"></i> Panel de Gestión
             </h3>
-            
             <div class="admin-grid">
                 <p class="admin-label">SOCIOS</p>
-                <button onclick="agregarFilaSocio()" class="ws-btn" style="background: var(--verde-oscuro);">
-                    <i class="fas fa-user-plus"></i> Nuevo Socio
-                </button>
-
-                <button onclick="activarModoEdicion()" class="ws-btn" style="background: #f39c12;">
-                    <i class="fas fa-edit"></i> Editar Datos (Celdas)
-                </button>
-
-                <button onclick="eliminarSocioPorNumero()" class="ws-btn" style="background: #e74c3c;">
-                    <i class="fas fa-user-minus"></i> Borrar Socio
-                </button>
+                <button onclick="agregarFilaSocio()" class="ws-btn" style="background: var(--verde-oscuro);"><i class="fas fa-user-plus"></i> Nuevo Socio</button>
+                <button onclick="activarModoEdicion()" class="ws-btn" style="background: #f39c12;"><i class="fas fa-edit"></i> Editar Datos</button>
+                <button onclick="eliminarSocioPorNumero()" class="ws-btn" style="background: #e74c3c;"><i class="fas fa-user-minus"></i> Borrar Socio</button>
                 <p class="admin-label">MESES</p>
                 <button onclick="agregarColumnaMes()" class="ws-btn" style="background: var(--verde-claro);"><i class="fas fa-calendar-plus"></i> Nuevo Mes</button>
                 <button onclick="eliminarUltimaColumna()" class="ws-btn" style="background: #e74c3c;"><i class="fas fa-calendar-minus"></i> Borrar Último Mes</button>
-
                 <p class="admin-label">LIBRO DE CAJA</p>
                 <button onclick="agregarFilaCaja()" class="ws-btn" style="background: #2980b9;"><i class="fas fa-plus-circle"></i> Agregar Movimiento</button>
                 <button onclick="activarModoEdicionCaja()" class="ws-btn" style="background: #3498db;"><i class="fas fa-edit"></i> Editar Montos</button>
@@ -121,36 +111,26 @@
             </div>
         </div>
     </div>
-<div id="modalCierre" class="modal-overlay" style="display: none;">
-    <div class="modal-card" style="text-align: center; padding: 40px; border: 2px solid var(--verde-claro);">
-        <img src="logoEscuadron.jpeg" alt="Logo Escuadrón" class="logo-salida-anim" 
-             style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-        
-        <h3 style="color: var(--verde-oscuro); margin-bottom: 10px; font-size: 1.5rem;">Finalizando Sesión</h3>
-        <p style="color: #666; font-size: 1.1rem;">
-            Cerrando acceso de forma segura... <br>
-            <i class="fas fa-sync fa-spin" style="margin-top: 15px; color: var(--verde-claro);"></i>
-        </p>
-    </div>
-</div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAXDRi_xsB2cDcIUGR1wXBAffk8bVMl-YE",
+            authDomain: "casinoooss.firebaseapp.com",
+            projectId: "casinoooss",
+            storageBucket: "casinoooss.firebasestorage.app",
+            messagingSenderId: "220846616866",
+            appId: "1:220846616866:web:a434361f6334d2c03af57b"
+        };
+        // Inicializar Firebase una sola vez
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+    </script>
 
     <script src="script.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
-
-<script>
-  // Reemplaza esto con la configuración que obtienes en tu consola de Firebase
-  const firebaseConfig = {
-  apiKey: "AIzaSyAXDRi_xsB2cDcIUGR1wXBAffk8bVMl-YE",
-  authDomain: "casinoooss.firebaseapp.com",
-  projectId: "casinoooss",
-  storageBucket: "casinoooss.firebasestorage.app",
-  messagingSenderId: "220846616866",
-  appId: "1:220846616866:web:a434361f6334d2c03af57b"
-};
-  // Inicializar Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-</script>
 </body>
 </html>

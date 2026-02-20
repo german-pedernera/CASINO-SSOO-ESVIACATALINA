@@ -1,129 +1,532 @@
+/* Variables de color institucionales */
 :root {
-    --verde-oscuro: #1b4332;
-    --verde-medio: #2d6a4f;
-    --verde-claro: #40916c;
+    --verde-oscuro: #0d3b2e;
+    --verde-medio: #1b4332;
+    --verde-claro: #2d6a4f;
     --blanco: #ffffff;
-    --gris-fondo: #f8fafc;
+    --gris-fondo: #f4f7f6;
+    --sidebar-width: 260px;
+    --monto-pos: #386641;
+    --monto-neg: #bc4749;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* Reset y Estilos Base */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', system-ui, sans-serif; 
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body.app-layout {
+    display: flex;
     background-color: var(--gris-fondo);
-    padding-bottom: 100px;
-    color: #333;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* --- Animación de Logo (Index) --- */
+.logo-animado {
+    animation: fadeInDown 1.2s ease-out, floating 3s ease-in-out infinite;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Barra Lateral (Sidebar) --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--verde-oscuro);
+    color: white;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header { 
+    padding: 20px; 
+    text-align: center; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+
+.sidebar-nav { 
+    flex: 1; 
+    padding: 15px 10px; 
+}
+
+.nav-item {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    background: transparent;
+    border: none;
+    color: #cbd5e0;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active { 
+    background: var(--verde-medio); 
+    color: white; 
+}
+
+.nav-item i { 
+    margin-right: 12px; 
+    width: 20px; 
+    text-align: center; 
+}
+
+/* --- Contenido Principal --- */
 .main-content {
-    padding: 15px;
-    max-width: 900px;
-    margin: 0 auto;
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 20px;
+    width: 100%;
+    max-width: calc(100vw - var(--sidebar-width));
+    transition: margin-left 0.3s ease;
 }
 
-.dashboard-card {
-    background: var(--blanco);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+.dashboard-card { 
+    background: white; 
+    padding: 25px; 
+    border-radius: 12px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: auto; /* Permite que la card crezca con la lista completa */
+}
+
+/* --- Tablas --- */
+.table-container { 
+    width: 100%; 
+    overflow-x: auto; /* Permite scroll lateral en móviles si la tabla es ancha */
     margin-bottom: 20px;
 }
 
-.table-container {
-    overflow-x: auto;
-}
-
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
+.data-table { 
+    width: 100%; 
+    border-collapse: collapse; 
     font-size: 0.9rem;
 }
 
-.data-table th, .data-table td {
-    padding: 12px;
+.data-table th, .data-table td { 
+    padding: 12px 8px; 
+    border-bottom: 1px solid #edf2f7; 
     text-align: left;
-    border-bottom: 1px solid #edf2f7;
 }
 
-.data-table th {
-    background: #f1f5f9;
-    color: var(--verde-oscuro);
-    font-weight: 600;
-    white-space: nowrap;
+.data-table th { 
+    background: #f8fafc; 
+    color: var(--verde-oscuro); 
 }
 
-.text-center { text-align: center; }
+.text-center { text-align: center !important; }
+.monto-pos { color: var(--monto-pos); font-weight: bold; }
+.monto-neg { color: var(--monto-neg); font-weight: bold; }
+.row-total-final { 
+    background-color: var(--verde-oscuro); 
+    color: white; 
+    font-weight: bold; 
+}
 
-.monto-pos { color: #2e7d32; font-weight: bold; }
-.monto-neg { color: #c62828; font-weight: bold; }
-
-/* Botones */
+/* --- Botones --- */
 .ws-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    gap: 8px;
 }
 
-.ws-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+/* --- Modales --- */
+.modal-overlay { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.7); 
+    z-index: 2000; 
+    align-items: center; 
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease; 
+}
 
-/* Menú Flotante */
-.floating-menu {
+.modal-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 12px; 
+    width: 90%; 
+    max-width: 500px; 
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+/* --- Responsividad --- */
+.mobile-toggle { 
+    display: none; 
+    position: fixed; 
+    top: 15px; 
+    right: 15px; 
+    background: var(--verde-oscuro); 
+    color: white; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 6px; 
+    z-index: 1100; 
+}
+
+@media (max-width: 992px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.active { transform: translateX(0); }
+    .main-content { margin-left: 0; max-width: 100vw; padding-top: 70px; }
+    .mobile-toggle { display: block; }
+    .data-table { font-size: 0.75rem; }
+}
+/* --- Ajustes para Layout Móvil --- */
+body.app-layout {
+    display: block; /* Quitamos el flex para que no se choque con la sidebar */
+    background-color: var(--gris-fondo);
+    min-height: 100vh;
+    padding-bottom: 80px; /* Espacio para que el contenido no quede oculto tras la barra */
+}
+
+/* Ocultar la sidebar original y el botón de menú móvil */
+.sidebar, .mobile-toggle {
+    display: none !important;
+}
+
+/* Ajustar el contenido principal para que use todo el ancho */
+.main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 15px;
+}
+
+/* --- Nueva Barra de Navegación Inferior --- */
+.bottom-nav {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    width: 90%;
+    max-width: 400px;
+    background: white;
     display: flex;
-    padding: 10px 20px;
-    border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    gap: 15px;
-    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 5px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
 }
 
-.nav-item {
-    text-decoration: none;
-    color: #64748b;
+.nav-item-mobile {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
+    color: #888;
     font-size: 0.7rem;
-    background: none;
+    transition: all 0.3s ease;
     border: none;
+    background: none;
     cursor: pointer;
 }
 
-.nav-item i { font-size: 1.2rem; margin-bottom: 4px; }
-.nav-item.active { color: var(--verde-oscuro); font-weight: bold; }
+.nav-item-mobile i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
 
-/* Modales */
+.nav-item-mobile.active {
+    color: var(--verde-oscuro);
+    transform: translateY(-5px);
+}
+
+.nav-item-mobile.active i {
+    color: var(--verde-claro);
+}
+
+/* Ajuste específico para el logo en el header si fuera necesario */
+.content-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* --- Ajustes para Layout Móvil (App) --- */
+body.app-layout {
+    display: block; /* Cambiamos de flex a block */
+    background-color: var(--gris-fondo);
+    min-height: 100vh;
+    padding-bottom: 90px; /* Espacio para que el contenido no tape la barra */
+}
+
+/* Ocultar Sidebar y Botón de Menú antiguo */
+.sidebar, .mobile-toggle {
+    display: none !important;
+}
+
+/* El contenido principal ahora usa el 100% */
+.main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 15px;
+}
+
+/* --- Nueva Barra de Navegación Inferior (Bottom Nav) --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 25px; /* Separada un poco del borde inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); /* Efecto de desenfoque moderno */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 20px;
+    /* Sombra profunda para efecto flotante */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
+    z-index: 10000;
+}
+
+.nav-item-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #7f8c8d;
+    font-size: 0.65rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    background: none;
+    cursor: pointer;
+    flex: 1;
+}
+
+.nav-item-mobile i {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+/* Estado activo: cuando el usuario está en esa página */
+.nav-item-mobile.active {
+    color: var(--verde-oscuro);
+    transform: translateY(-5px); /* Pequeño salto hacia arriba */
+}
+
+.nav-item-mobile.active i {
+    color: var(--verde-claro);
+    text-shadow: 0 4px 8px rgba(45, 106, 79, 0.3);
+}
+
+/* --- Animación de Pulso para Item Activo --- */
+@keyframes pulse-green {
+    0% { transform: translateY(-5px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.1); opacity: 0.8; }
+    100% { transform: translateY(-5px) scale(1); }
+}
+
+.nav-item-mobile.active i {
+    color: var(--verde-claro);
+    text-shadow: 0 0 10px rgba(45, 106, 79, 0.4);
+    animation: pulse-green 2s infinite ease-in-out;
+}
+
+/* Efecto al presionar (Touch Feedback) */
+.nav-item-mobile:active {
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+/* Ajuste de sombras para el menú flotante */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 450px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* --- Animación de Pulso y Cambio de Color para Item Activo --- */
+@keyframes pulse-and-color {
+    0% { 
+        transform: translateY(-8px) scale(1); 
+        color: var(--verde-claro); 
+    }
+    50% { 
+        transform: translateY(-8px) scale(1.1); 
+        color: var(--verde-oscuro); /* Cambia al verde más oscuro del Escuadrón */
+        text-shadow: 0 5px 15px rgba(45, 106, 79, 0.4);
+    }
+    100% { 
+        transform: translateY(-8px) scale(1); 
+        color: var(--verde-claro); 
+    }
+}
+
+.nav-item-mobile.active i {
+    animation: pulse-and-color 3s infinite ease-in-out;
+}
+
+.nav-item-mobile.active span {
+    color: var(--verde-oscuro);
+    font-weight: 800;
+}
+
+/* --- Estilo de la Barra con un ligero degradado --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 450px;
+    background: linear-gradient(145deg, #ffffff, #f0f4f2); /* Un toque de color sutil */
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 5px;
+    border-radius: 22px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Efecto al tocar cualquier botón */
+.nav-item-mobile:active i {
+    color: var(--verde-claro);
+    transform: scale(0.8);
+    transition: 0.1s;
+}
+
+/* --- Barra de Navegación Inferior --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%; /* Un poco más ancha para dar espacio */
+    max-width: 500px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center; /* Centra el grupo de botones */
+    align-items: center;
+    padding: 10px 5px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+}
+
+.nav-item-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #7f8c8d;
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Esto garantiza que todos midan lo mismo */
+    flex: 1; 
+    min-width: 0; 
+    gap: 4px; /* Espacio exacto entre icono y texto */
+    transition: all 0.3s ease;
+}
+
+.nav-item-mobile i {
+    font-size: 1.4rem; /* Tamaño uniforme para todos los iconos */
+    height: 24px;      /* Altura fija para que el texto no suba y baje */
+    display: flex;
+    align-items: center;
+}
+
+.nav-item-mobile span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+}
+
+/* --- Estado Activo con Animación de Color --- */
+.nav-item-mobile.active {
+    color: var(--verde-oscuro);
+}
+
+.nav-item-mobile.active i {
+    animation: pulse-and-color 3s infinite ease-in-out;
+}
+
+@keyframes pulse-and-color {
+    0% { transform: scale(1); color: var(--verde-claro); }
+    50% { transform: scale(1.15); color: var(--verde-oscuro); }
+    100% { transform: scale(1); color: var(--verde-claro); }
+}
+.nav-item-mobile i.fa-cog {
+    color: var(--verde-oscuro);
+}
+
+.admin-actions .ws-btn {
+    font-size: 0.75rem;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
 .modal-overlay {
+    display: none;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
+    background: rgba(0,0,0,0.7);
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 10001;
 }
 
 .modal-card {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 15px;
     width: 90%;
     max-width: 400px;
@@ -132,146 +535,174 @@ body {
 
 .close-modal {
     position: absolute;
-    top: 15px; right: 15px;
+    right: 15px;
+    top: 10px;
     font-size: 1.5rem;
     cursor: pointer;
 }
 
-.admin-grid {
+/* Contenedor principal adaptable */
+.main-content {
+    width: 100%;
+    padding: 10px; /* Menos espacio en los bordes para móviles */
+    margin-bottom: 80px; /* Espacio para que la nav inferior no tape contenido */
+}
+
+/* Tablas Responsivas: Evita que la pantalla se rompa hacia los lados */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite deslizar la tabla con el dedo si es muy ancha */
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+
+.data-table {
+    min-width: 600px; /* Mantiene un tamaño mínimo para que los datos sean legibles */
+    width: 100%;
+}
+
+/* Ajustes de tipografía para pantallas pequeñas */
+@media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    .dashboard-card {
+        padding: 15px;
+        margin: 5px;
+    }
+    
+    /* Botones más fáciles de tocar */
+    .ws-btn {
+        width: 100%;
+        padding: 15px;
+        font-size: 1rem;
+    }
+}
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--verde-oscuro);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.nav-item-mobile {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 0.7rem;
+    background: none;
+    border: none;
 }
 
-/* MODO EDICIÓN */
-[contenteditable="true"] {
-    background-color: #fffde7 !important;
-    outline: 2px solid #fbc02d;
-    cursor: cell;
+.nav-item-mobile i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
 }
-
-[contenteditable="true"]:focus {
-    background-color: #ffffff !important;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-}
-
-.no-editable {
-    background-color: #f8fafc !important;
-    color: #94a3b8;
-    pointer-events: none;
-}
-
-/* Estilos para Alertas Personalizadas */
-.custom-alert-overlay {
+/* Panel de herramientas de Admin */
+.admin-actions {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    bottom: 85px; /* Arriba de la nav inferior */
+    right: 15px;
+    left: 15px; /* Se estira en todo el ancho del móvil */
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 2px solid var(--verde-claro);
+}
+
+/* Botón flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 85px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    backdrop-filter: blur(4px);
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 99;
 }
-
-.custom-alert-card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    width: 85%;
-    max-width: 350px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* Mejora de Responsividad para Tablas */
-@media (max-width: 600px) {
-    .main-content { padding: 10px; }
-    .dashboard-card { padding: 15px; }
-    .data-table { font-size: 0.8rem; }
-    .data-table th, .data-table td { padding: 8px 5px; }
+.bottom-nav {
+    display: flex;
+    /* Centrado de los elementos internos */
+    justify-content: center; 
+    align-items: center;
     
-    .floating-menu {
-        width: 95%;
-        padding: 8px 10px;
-        gap: 5px;
-    }
+    /* Posicionamiento fijo */
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Truco para centrar elementos con position: fixed */
     
-    .nav-item span { font-size: 0.6rem; }
+    /* Diseño y dimensiones */
+    width: 100%;
+    max-width: 500px; /* Evita que se vea muy ancho en tablets */
+    height: 70px;
+    background: var(--verde-oscuro);
+    
+    /* Estética de App */
+    border-radius: 20px 20px 0 0; /* Bordes redondeados arriba */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    padding: 0 10px;
+    z-index: 1000;
 }
 
-/* Scroll suave para tablas en móvil */
-.table-container {
-    -webkit-overflow-scrolling: touch;
-    border-radius: 8px;
-}
-
-/* Busca esta sección en tu style.css */
-@media (max-width: 600px) {
-    .main-content { padding: 10px; }
-    .dashboard-card { padding: 15px; }
-    .data-table { font-size: 0.8rem; }
-    .data-table th, .data-table td { padding: 8px 5px; }
-    
-    /* Ajuste para centrado perfecto del menú */
-    .floating-menu {
-        width: 90%;            /* Ocupa casi todo el ancho disponible */
-        max-width: 400px;      /* Pero no se estira demasiado en tablets */
-        left: 50% !important;  /* Forzamos el punto de anclaje al centro */
-        bottom: 15px;          /* Un poco más cerca del borde inferior */
-        transform: translateX(-50%) !important; /* Lo mueve a la izquierda la mitad de su propio ancho */
-        padding: 8px 15px;
-        gap: 8px;
-        justify-content: space-around; /* Distribuye los íconos equitativamente */
-    }
-    
-    .nav-item span { font-size: 0.6rem; }
-}
-
-/* Contenedor de los botones de documentos */
-.docs-container {
+.nav-item-mobile {
+    flex: 1; /* Hace que todos los botones ocupen el mismo ancho */
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-/* Estilo de Botón Flotante */
-.doc-button-floating {
-    display: flex;
     align-items: center;
-    background: var(--blanco);
-    color: var(--verde-oscuro);
-    text-decoration: none;
-    padding: 15px 20px;
-    border-radius: 12px;
-    border-left: 5px solid var(--verde-claro);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para efecto flotante */
+    justify-content: center;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: 500;
+    gap: 4px; /* Espacio entre icono y texto */
 }
 
-.doc-button-floating i {
-    font-size: 1.5rem;
-    margin-right: 15px;
-    color: var(--verde-medio);
+/* Efecto visual al presionar (Opcional) */
+.nav-item-mobile:active {
+    transform: scale(0.9);
+    opacity: 0.7;
 }
 
-/* Efecto al pasar el mouse (hover) */
-.doc-button-floating:hover {
-    transform: translateY(-5px); /* Se eleva un poco más */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    background-color: #f0fdf4; /* Un toque de verde muy suave */
-    color: var(--verde-medio);
+.nav-item-mobile i {
+    font-size: 1.2rem;
 }
 
-/* Efecto al hacer clic */
-.doc-button-floating:active {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.nav-item-mobile span {
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Fondo más oscuro para el cierre */
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
 }

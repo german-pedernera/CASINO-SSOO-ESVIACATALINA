@@ -2,39 +2,115 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso - Casino de SSOO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>App Casino de Oficiales - E.S.V. Santa Catalina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="app-layout">
-    <main class="main-content" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0 auto;">
-        <div class="dashboard-card" style="text-align: center; padding: 40px; max-width: 400px; width: 90%;">
-            <img src="logoEscuadron.jpeg" alt="logo Escuadrón" class="logo-animado" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
-            <h1 style="color: var(--verde-oscuro); margin-bottom: 5px;">BIENVENIDO</h1>
-            <h2 style="color: var(--verde-medio); font-weight: 400; margin-bottom: 25px; font-size: 1.2rem;">CASINO DE OFICIALES</h2>
+<body class="bg-slate-50 min-h-screen">
+
+    <section id="view-login" class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-[2rem] shadow-xl p-8 max-w-sm w-full text-center border border-gray-100">
+            <img src="/logoEscuadron.jpeg" alt="Logo" class="w-24 h-24 rounded-full border-4 border-white shadow-lg mx-auto mb-6">
+            <h1 class="text-2xl font-bold text-[#062c22]">BIENVENIDO</h1>
+            <p class="text-gray-500 mb-8 uppercase tracking-widest text-xs">Casino de Oficiales</p>
             
-            <div id="login-form" style="display: flex; flex-direction: column; gap: 15px;">
-                <div style="text-align: left;">
-                    <label style="font-size: 0.8rem; color: #666; font-weight: bold;">USUARIO (MI)</label>
-                    <input type="text" id="user-input" placeholder="Ingrese su MI" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+            <div class="space-y-4 text-left">
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 ml-2">USUARIO (MI)</label>
+                    <input type="text" id="user-input" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#2d6a4f]" placeholder="Ingrese su MI">
                 </div>
-                <div style="text-align: left;">
-                    <label style="font-size: 0.8rem; color: #666; font-weight: bold;">CONTRASEÑA (CE)</label>
-                    <input type="password" id="pass-input" placeholder="Ingrese su CE" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 ml-2">CONTRASEÑA (CE)</label>
+                    <input type="password" id="pass-input" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#2d6a4f]" placeholder="Ingrese su CE">
                 </div>
-                <button onclick="validarAcceso()" class="ws-btn" style="background-color: var(--verde-oscuro);">
-                    INGRESAR A RENDICIÓN
+                <button onclick="validarAcceso()" class="w-full bg-[#1b4332] text-white p-4 rounded-2xl font-bold shadow-lg active:scale-95 transition-transform mt-4">
+                    INGRESAR
                 </button>
-                <p id="error-msg" style="color: red; font-size: 0.85rem; display: none; font-weight: bold;">❌ Datos Incorrectos - Reintente</p>
+                <p id="error-msg" class="text-red-500 text-xs text-center font-bold hidden mt-2">❌ Datos Incorrectos - Reintente</p>
             </div>
-            <p style="color: #888; margin-top: 30px; font-size: 0.8rem;">
-                Escuadrón Seguridad Vial "SANTA CATALINA"<br>Gendarmería Nacional Argentina
-            </p>
+            <p class="mt-8 text-[10px] text-gray-400 leading-relaxed">Escuadrón Seguridad Vial "SANTA CATALINA"<br>Gendarmería Nacional Argentina</p>
         </div>
+    </section>
+
+    <main id="app-content" class="hidden max-w-4xl mx-auto px-4 pt-8 pb-32">
+        <header class="text-center mb-10">
+            <img src="/logoEscuadron.jpeg" class="w-20 h-20 rounded-full border-4 border-white shadow-lg mx-auto mb-4">
+            <h1 id="user-greeting" class="text-xl font-bold text-[#062c22] uppercase">HOLA</h1>
+            <p class="text-gray-400 text-xs">E.S.V. SANTA CATALINA</p>
+        </header>
+
+        <section id="view-rendicion" class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+                <button class="bg-[#1b4332] text-white p-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-2"><i class="fas fa-chart-pie"></i> Stats</button>
+                <button class="bg-white text-[#1b4332] border border-gray-100 p-4 rounded-2xl font-bold shadow-sm flex items-center justify-center gap-2"><i class="fas fa-university"></i> Pagos</button>
+            </div>
+            <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-6 overflow-hidden">
+                <h3 class="font-bold text-gray-800 mb-6 border-l-4 border-[#2d6a4f] pl-3">Socios Activos</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr class="text-gray-400 uppercase text-[10px] tracking-widest border-b border-gray-50">
+                                <th class="py-3 px-2">Nro</th>
+                                <th class="py-3 px-2">Grado & Nombre</th>
+                                <th class="py-3 px-2 text-center">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla" class="divide-y divide-gray-50"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-cumpleanos" class="hidden">
+            <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-6">
+                <h3 class="font-bold text-gray-800 mb-6 border-l-4 border-yellow-400 pl-3">Calendario de Cumpleaños</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr class="text-gray-400 uppercase text-[10px] tracking-widest border-b border-gray-50">
+                                <th class="py-3 px-2">Grado</th>
+                                <th class="py-3 px-2">Nombre</th>
+                                <th class="py-3 px-2 text-center">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-cumpleanos" class="divide-y divide-gray-50"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-galeria" class="hidden space-y-6">
+            <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-4 overflow-hidden">
+                <div class="relative rounded-2xl overflow-hidden aspect-video">
+                    <div id="carousel" class="flex transition-transform duration-500">
+                        <img src="/CENA 29DIC25 (3).jpeg" class="w-full object-cover">
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4 p-2 text-center italic">Cena de camaradería 29 de Diciembre de 2025.</p>
+                <a href="https://drive.google.com/drive/folders/1QftVjbLZOL3nNL73EmnrGGd_qu9vaqa0" target="_blank" class="block w-full text-center bg-[#25D366] text-white p-4 rounded-2xl font-bold mt-4">
+                    <i class="fas fa-download mr-2"></i> Descargar Fotos
+                </a>
+            </div>
+        </section>
     </main>
+
+    <nav id="bottom-nav" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-md bg-white/80 backdrop-blur-md border border-gray-100 shadow-2xl rounded-[2.5rem] flex justify-around p-3 z-50">
+        <button onclick="navegar('rendicion')" class="nav-btn flex flex-col items-center text-[#1b4332]" data-section="rendicion"><i class="fas fa-calculator text-xl"></i><span class="text-[10px] font-bold mt-1">Rendición</span></button>
+        <button onclick="navegar('cumpleanos')" class="nav-btn flex flex-col items-center text-gray-400" data-section="cumpleanos"><i class="fas fa-birthday-cake text-xl"></i><span class="text-[10px] font-bold mt-1">Cumples</span></button>
+        <button onclick="navegar('galeria')" class="nav-btn flex flex-col items-center text-gray-400" data-section="galeria"><i class="fas fa-images text-xl"></i><span class="text-[10px] font-bold mt-1">Fotos</span></button>
+        <button onclick="cerrarSesion()" class="flex flex-col items-center text-red-400"><i class="fas fa-power-off text-xl"></i><span class="text-[10px] font-bold mt-1">Salir</span></button>
+    </nav>
+
+    <div id="modalCierre" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-[100]">
+        <div class="bg-white rounded-[3rem] p-10 max-w-xs w-full text-center shadow-2xl">
+            <i class="fas fa-spinner fa-spin text-4xl text-[#2d6a4f] mb-4"></i>
+            <h3 class="text-xl font-bold text-gray-800">Finalizando Sesión</h3>
+        </div>
+    </div>
+
     <script src="script.js"></script>
-    <script type="module" src="script.js"></script>
 </body>
 </html>

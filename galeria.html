@@ -2,44 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Galería - Casino de SSOO</title>
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="app-layout">
-    <aside class="sidebar" id="sidebar">
-        <header class="content-header" style="text-align: center;">
-            <img src="logoEscuadron.jpeg" alt="logo" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px;">
-            <h2 style="color: var(--verde-oscuro);">Galería Fotográfica</h2>
-            <p>Eventos y actividades institucionales</p>
-        </header>
-            <nav class="floating-menu">
-                <a href="dashboard.html" class="nav-item" id="nav-rendicion">
-                    <i class="fas fa-calculator"></i>
-                    <span>Rendición</span>
-                </a>
-                <a href="documentacion.html" class="nav-item" id="nav-docs">
-                    <i class="fas fa-folder-open"></i>
-                    <span>Docs</span>
-                </a>
-                <button onclick="validarAccesoAdmin()" class="nav-item gear-btn">
-                    <i class="fas fa-cog"></i>
-                    <span>Gestión</span>
-                </button>
-                <a href="cumpleanos.html" class="nav-item" id="nav-cumple">
-                    <i class="fas fa-birthday-cake"></i>
-                    <span>Cumple</span>
-                </a>
-                <button onclick="cerrarSesion()" class="nav-item">
-                    <i class="fas fa-power-off"></i>
-                    <span>Salir</span>
-                </button>
-            </nav>
-    </aside>
+    <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+
+<nav class="bottom-nav">
+    <button onclick="window.location.href='dashboard.html'" class="nav-item-mobile">
+        <i class="fas fa-calculator"></i><span>Rendición</span>
+    </button>
+    <button onclick="window.location.href='documentacion.html'" class="nav-item-mobile">
+        <i class="fas fa-file-invoice"></i><span>Docs</span>
+    </button>
+    <button onclick="window.location.href='cumpleanos.html'" class="nav-item-mobile">
+        <i class="fas fa-birthday-cake"></i><span>Cumples</span>
+    </button>
+    <button onclick="window.location.href='galeria.html'" class="nav-item-mobile">
+        <i class="fas fa-images"></i><span>Fotos</span>
+    </button>
+    <button onclick="cerrarSesion()" class="nav-item-mobile" style="color: #e74c3c;">
+        <i class="fas fa-sign-out-alt"></i><span>Salir</span>
+    </button>
+    <button onclick="window.open('https://chat.whatsapp.com/GRAhacEZeOiLGvpFQb3iKO', '_blank')" class="nav-item-mobile">
+    <i class="fab fa-whatsapp" style="color: #25D366;"></i><span>Contacto</span>
+    </button>
+</nav>
+
+<div id="modalAdmin" class="modal-overlay" onclick="cerrarSiClickFuera(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <span class="close-modal" onclick="cerrarPanelAdmin()">&times;</span>
+        <h3>Panel de Control</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+            <button onclick="activarEdicion()" class="ws-btn" style="background: var(--verde-claro);"><i class="fas fa-edit"></i> Editar</button>
+            <button onclick="guardarCambios()" class="ws-btn" style="background: var(--verde-oscuro);"><i class="fas fa-save"></i> Guardar</button>
+            <button onclick="agregarFila()" class="ws-btn" style="background: #3498db;"><i class="fas fa-plus-circle"></i> + Fila</button>
+            <button onclick="borrarFila()" class="ws-btn" style="background: #e74c3c;"><i class="fas fa-minus-circle"></i> - Fila</button>
+            <button onclick="agregarColumna()" class="ws-btn" style="background: #9b59b6;"><i class="fas fa-columns"></i> + Col</button>
+        </div>
+    </div>
+</div>
 
     <main class="main-content">
+        <header class="content-header" style="text-align: center; padding: 10px 0;">
+            <img src="/logoEscuadron.jpeg" alt="Logo" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h2 style="color: var(--verde-oscuro); font-size: 1.2rem;">CASINO DE OFICIALES</h2>
+            <h2>Galería Fotográfica</h2>
+        </header>
         <div class="dashboard-card">
             <div class="carousel-container" style="max-width: 800px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 15px;">
                 <div class="carousel-slide">
@@ -69,18 +81,12 @@
         </div>
     </main>
 
-<div id="modalCierre" class="modal-overlay" style="display: none;">
-    <div class="modal-card" style="text-align: center; padding: 40px; border: 2px solid var(--verde-claro);">
-        <img src="logoEscuadron.jpeg" alt="Logo Escuadrón" class="logo-salida-anim" 
-             style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-        
-        <h3 style="color: var(--verde-oscuro); margin-bottom: 10px; font-size: 1.5rem;">Finalizando Sesión</h3>
-        <p style="color: #666; font-size: 1.1rem;">
-            Cerrando acceso de forma segura... <br>
-            <i class="fas fa-sync fa-spin" style="margin-top: 15px; color: var(--verde-claro);"></i>
-        </p>
+    <div id="modalCierre" class="modal-overlay">
+        <div class="modal-card" style="text-align: center;">
+            <i class="fas fa-sign-out-alt fa-spin" style="font-size: 3rem; color: var(--verde-oscuro); margin-bottom: 20px;"></i>
+            <h3>Cerrando Sesión App Casino SSOO...</h3>
+        </div>
     </div>
-</div>
 
     <script src="script.js"></script>
     <script>
@@ -92,11 +98,15 @@
             slides[currentSlide].style.display = 'block';
         }
     </script>
-        <script type="module">
-        import { db } from './firebase-config.js';
-        // Aquí puedes agregar el código para interactuar con Firestore
-    </script>
-<script type="module" src="script.js"></script>
-<script type="module" src="script.js"></script>
+    <div id="modalCierre" class="modal-overlay" style="display: none; opacity: 0; z-index: 20000;">
+    <div class="modal-card" style="text-align: center; padding: 40px;">
+        <img src="/logoEscuadron.jpeg" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;">
+        <h3 style="color: var(--verde-oscuro);">Cerrando Sesión</h3>
+        <p>App Casino de Oficiales</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #666;">E.S.V. SANTA CATALINA</p>
+        <br>
+        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--verde-claro);"></i>
+    </div>
+</div>
 </body>
 </html>
